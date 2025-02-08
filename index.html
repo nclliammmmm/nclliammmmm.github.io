@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Works Manager</title>
+    <title>Cloud Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         /* Smooth scrolling */
@@ -17,12 +17,13 @@
     <!-- Header Section -->
     <header class="bg-blue-600 text-white py-4">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">CloudWorks Manager</h1>
+            <h1 class="text-2xl font-bold">Cloud Management System</h1>
             <nav role="navigation">
                 <ul class="flex space-x-4">
-                    <li><a href="#features" class="hover:underline" aria-label="Go to Features section">Features</a></li>
                     <li><a href="#about" class="hover:underline" aria-label="Go to About section">About</a></li>
-                    <li><a href="#contact" class="hover:underline" aria-label="Go to Contact section">Contact</a></li>
+                    <li><a href="#admin-panel" class="hover:underline" aria-label="Go to Admin Panel">Admin Panel</a></li>
+                    <li><a href="#contact" class="hover:underline" aria-label="Go to Contact IT section">Contact IT</a></li>
+                    <li><a href="#reset-password" class="hover:underline" aria-label="Go to Reset Password section">Reset Password</a></li>
                 </ul>
             </nav>
         </div>
@@ -31,42 +32,43 @@
     <!-- Main Section -->
     <main class="container mx-auto py-8">
         
-        <!-- Hero Section -->
-        <section id="hero" class="text-center py-16 bg-white shadow-md rounded-lg">
-            <h2 class="text-4xl font-bold mb-4">Simplify Your Cloud Management</h2>
-            <p class="text-lg text-gray-700 mb-6">CloudWorks Manager helps you efficiently manage your cloud infrastructure with ease.</p>
-            <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700">Get Started</a>
+        <!-- About Section -->
+        <section id="about" class="text-center py-16 bg-white shadow-md rounded-lg">
+            <h2 class="text-4xl font-bold mb-4">Welcome to Cloud Management</h2>
+            <p class="text-lg text-gray-700 mb-6">Manage your cloud infrastructure securely and efficiently. Our platform provides various tools for monitoring, user management, and IT support.</p>
         </section>
 
-        <!-- Features Section -->
-        <section id="features" class="py-16">
-            <h2 class="text-3xl font-bold text-center mb-8">Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 space-y-6 md:space-y-0">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold mb-2">Feature 1</h3>
-                    <p class="text-gray-700">Efficient monitoring and reporting tools to streamline your operations.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold mb-2">Feature 2</h3>
-                    <p class="text-gray-700">Secure and scalable solutions tailored to your business needs.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold mb-2">Feature 3</h3>
-                    <p class="text-gray-700">User-friendly interface with advanced analytics capabilities.</p>
-                </div>
+        <!-- Admin Panel Section -->
+        <section id="admin-panel" class="py-16 bg-gray-200">
+            <h2 class="text-3xl font-bold text-center mb-8">Admin Panel</h2>
+            <p class="text-center text-gray-700 mb-6">As an administrator, you have access to manage users, track system performance, and configure settings. Use the tools below to monitor and control the cloud system.</p>
+            <div class="text-center">
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 mb-4">Manage Users</button>
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 mb-4">View System Logs</button>
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700">Configure Settings</button>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-16 bg-gray-200">
-            <h2 class="text-3xl font-bold text-center mb-8">About Us</h2>
-            <p class="text-center text-gray-700 max-w-2xl mx-auto lg:mx-0">CloudWorks Manager is dedicated to helping businesses of all sizes simplify and optimize their cloud infrastructure. With years of experience and cutting-edge technology, we deliver solutions that make cloud management a breeze.</p>
+        <!-- Reset Password Section -->
+        <section id="reset-password" class="py-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Reset Your Password</h2>
+            <form class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md" aria-labelledby="resetPasswordForm">
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-bold">Email</label>
+                    <input type="email" id="email" name="email" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-600 focus:border-blue-600" required aria-required="true">
+                </div>
+                <div class="mb-4">
+                    <label for="new-password" class="block text-gray-700 font-bold">New Password</label>
+                    <input type="password" id="new-password" name="new-password" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-600 focus:border-blue-600" required aria-required="true">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Reset Password</button>
+            </form>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-16">
-            <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
-            <form class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md" aria-labelledby="contactForm">
+        <!-- Contact IT Section -->
+        <section id="contact" class="py-16 bg-gray-200">
+            <h2 class="text-3xl font-bold text-center mb-8">Contact IT Support</h2>
+            <form class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md" aria-labelledby="contactITForm">
                 <div class="mb-4">
                     <label for="name" class="block text-gray-700 font-bold">Name</label>
                     <input type="text" id="name" name="name" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-600 focus:border-blue-600" required aria-required="true">
@@ -76,17 +78,18 @@
                     <input type="email" id="email" name="email" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-600 focus:border-blue-600" required aria-required="true">
                 </div>
                 <div class="mb-4">
-                    <label for="message" class="block text-gray-700 font-bold">Message</label>
-                    <textarea id="message" name="message" rows="5" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-600 focus:border-blue-600" required aria-required="true"></textarea>
+                    <label for="issue" class="block text-gray-700 font-bold">Describe Your Issue</label>
+                    <textarea id="issue" name="issue" rows="5" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-600 focus:border-blue-600" required aria-required="true"></textarea>
                 </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Send</button>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Submit</button>
             </form>
         </section>
     </main>
 
     <!-- Footer Section -->
     <footer class="bg-blue-600 text-white text-center py-4">
-        <p>&copy; 2025 Cloud Works Manager. All rights reserved.</p>
+        <p>&copy; 2025 Cloud Management System. All rights reserved.</p>
     </footer>
+
 </body>
 </html>
