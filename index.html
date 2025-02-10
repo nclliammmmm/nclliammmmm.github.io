@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cloud Works</title>
+    <!-- Include Google Fonts for a clean appearance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Include Tailwind CSS for layout and styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         function sendEmail(event) {
             event.preventDefault(); // Prevent the form from submitting in the traditional manner
@@ -21,17 +27,30 @@
             window.location.href = mailtoLink; // Open the mail client with prefilled details
         }
     </script>
+    <script>
+        // Initialize Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3490dc',
+                        secondary: '#f1c40f',
+                    },
+                },
+            },
+        };
+    </script>
 </head>
 <body class="bg-gray-100 font-sans">
 
     <!-- Header Section -->
-    <header class="bg-blue-600 text-white py-4">
+    <header class="bg-primary text-white py-4">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Cloud Works</h1>
+            <h1 class="text-4xl font-bold">Cloud Works</h1>
             <nav role="navigation">
                 <ul class="flex space-x-4">
-                    <li><a href="#about" class="hover:underline" aria-label="Go to About section">About</a></li>
-                    <li><a href="#contact" class="hover:underline" aria-label="Go to Contact section">Contact IT</a></li>
+                    <li><a href="#about" class="hover:text-blue-700" aria-label="Go to About section">About</a></li>
+                    <li><a href="#contact" class="hover:text-blue-700" aria-label="Go to Contact section">Contact IT</a></li>
                 </ul>
             </nav>
         </div>
@@ -41,9 +60,19 @@
     <main class="container mx-auto py-8">
         
         <!-- About Section -->
-        <section id="about" class="text-center py-16 bg-white shadow-md rounded-lg">
+        <section id="about" class="text-center py-16 bg-white shadow-md rounded-lg max-w-lg mx-auto">
             <h2 class="text-4xl font-bold mb-4">Welcome To Cloud Works</h2>
             <p class="text-lg text-gray-700 mb-6">Here we offer IT help with issues for registered users. If you need support, please fill out the form below!</p>
+            <img src="about_image.jpg" alt="About Image" class="w-full shadow-md rounded-lg">
+        </section>
+
+        <!-- Hero Section -->
+        <section id="hero" class="bg-secondary py-16">
+            <div class="container mx-auto flex justify-center items-center">
+                <h1 class="text-5xl font-bold">Expert IT Support for Your Business</h1>
+                <p class="text-lg text-gray-700">Let us help you manage and resolve any IT related issues!</p>
+                <button class="bg-primary text-white shadow-md rounded-lg hover:bg-blue-700 transition">Get Started</button>
+            </div>
         </section>
 
         <!-- Contact IT Section with Form -->
@@ -63,16 +92,39 @@
                     <label for="message" class="block text-left">Message:</label>
                     <textarea id="message" name="message" rows="5" required class="w-full border border-gray-300 p-2 rounded"></textarea>
                 </div>
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Submit</button>
+                <button type="submit" class="bg-primary text-white px-4 py-2 rounded hover:bg-blue-700 transition">Submit</button>
             </form>
+            <p class="text-lg text-gray-700 mt-6">Don't forget to check your junk mail folder in case our reply ends up there!</p>
         </section>
         
     </main>
 
     <!-- Footer Section -->
-    <footer class="bg-blue-600 text-white text-center py-4">
+    <footer class="bg-secondary text-white text-center py-4">
         <p>&copy; 2025 Cloud Works. All rights reserved.</p>
     </footer>
+
+    <!-- Add a loading animation -->
+    <div id="spinner" class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center" style="display: none;">
+        <svg class="animate-spin h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" d='M4 12a8 8 0 018-8 8 8 0 018 8zM4 4a8 8 0 018 8A8 8 0 018 4z' stroke="currentColor" stroke-width="4"></path>
+        </svg>
+    </div>
+    <script>
+        // Display the spinner animation when the page loads
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("spinner").style.display = "block";
+        });
+        setTimeout(function() {
+            // Hide the spinner animation after 3 seconds
+            document.getElementById("spinner").style.display = "none";
+        }, 3000);
+
+        function sendEmail(event) {
+            // Rest of the sendEmail function remains the same
+        }
+    </script>
 
 </body>
 </html>
