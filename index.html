@@ -43,4 +43,36 @@
         <!-- About Section -->
         <section id="about" class="text-center py-16 bg-white shadow-md rounded-lg">
             <h2 class="text-4xl font-bold mb-4">Welcome To Cloud Works</h2>
-            <p class="text-lg text-gray-
+            <p class="text-lg text-gray-700 mb-6">Here we offer IT help with issues for registered users. If you need support, please fill out the form below!</p>
+        </section>
+
+        <!-- Contact IT Section with Form -->
+        <section id="contact" class="text-center py-16 bg-white shadow-md rounded-lg max-w-lg mx-auto">
+            <h2 class="text-4xl font-bold mb-4">Contact IT</h2>
+            <p class="text-lg text-gray-700 mb-6">Please fill out the form below to ask for help.</p>
+            <form onsubmit="sendEmail(event)" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-left">Name:</label>
+                    <input type="text" id="name" name="name" required class="w-full border border-gray-300 p-2 rounded"/>
+                </div>
+                <div>
+                    <label for="email" class="block text-left">Email:</label>
+                    <input type="email" id="email" name="email" required class="w-full border border-gray-300 p-2 rounded"/>
+                </div>
+                <div>
+                    <label for="message" class="block text-left">Message:</label>
+                    <textarea id="message" name="message" rows="5" required class="w-full border border-gray-300 p-2 rounded"></textarea>
+                </div>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Submit</button>
+            </form>
+        </section>
+        
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-blue-600 text-white text-center py-4">
+        <p>&copy; 2025 Cloud Works. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
