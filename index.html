@@ -92,23 +92,7 @@
         <p>&copy; 2025 Cloud Works. All rights reserved.</p>
     </footer>
 
-    <!-- Add a loading animation -->
-    <div id="spinner" class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center" style="display: none;">
-        <svg class="animate-spin h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" d='M4 12a8 8 0 018-8 8 8 0 018 8zM4 4a8 8 0 018 8A8 8 0 018 4z' stroke="currentColor" stroke-width="4"></path>
-        </svg>
-    </div>
     <script>
-        // Display the spinner animation when the page loads
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("spinner").style.display = "block";
-        });
-        setTimeout(function() {
-            // Hide the spinner animation after 3 seconds
-            document.getElementById("spinner").style.display = "none";
-        }, 3000);
-
         function sendEmail(event) {
             // Rest of the sendEmail function remains the same
         }
