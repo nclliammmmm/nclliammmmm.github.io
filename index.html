@@ -14,21 +14,16 @@
     <script>
         function sendEmail(event) {
             event.preventDefault(); // Prevent the form from submitting in the traditional manner
-    
+        
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-    
-            // Log values for debugging
-            console.log('Name:', name);
-            console.log('Email:', email);
-            console.log('Message:', message);
-    
+        
             // Construct the mailto link
             const subject = encodeURIComponent('Support Request from ' + name);
             const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
             const mailtoLink = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`;
-    
+        
             console.log('Mailto Link:', mailtoLink); // Log the mailto link for debugging
             window.location.href = mailtoLink; // Open the mail client with prefilled details
         }
