@@ -14,16 +14,22 @@
     <script>
         function sendEmail(event) {
             event.preventDefault(); // Prevent the form from submitting in the traditional manner
-
+    
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-
+    
+            // Log values for debugging
+            console.log('Name:', name);
+            console.log('Email:', email);
+            console.log('Message:', message);
+    
             // Construct the mailto link
             const subject = encodeURIComponent('Support Request from ' + name);
             const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
-
             const mailtoLink = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`;
+    
+            console.log('Mailto Link:', mailtoLink); // Log the mailto link for debugging
             window.location.href = mailtoLink; // Open the mail client with prefilled details
         }
     </script>
@@ -80,9 +86,8 @@
                     <label for="message" class="block text-left">Message:</label>
                     <textarea id="message" name="message" rows="5" required class="w-full border border-gray-300 p-2 rounded"></textarea>
                 </div>
-                <button type="submit" class="bg-blue-500 text-white p-2 rounded">Submit</button>
+                <button type="submit" class="bg-blue-500 text-white p-2 rounded">Send Email</button>
             </form>
-            <p class="text-lg text-gray-700 mt-6">Don't forget to check your junk mail folder in case our reply ends up there!</p>
         </section>
         
     </main>
