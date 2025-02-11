@@ -37,7 +37,7 @@
             }
         
             const subject = encodeURIComponent(`Support Request from ${name}`);
-            const body = `Name: ${encodeURIComponent(name)}\nEmail: ${encodeURIComponent(email)}\n\n${encodeURIComponent(message)}`;
+            const body = `Name: ${encodeURIComponent(name)}\nEmail: ${encodeURIComponent(email)}\nMessage: ${encodeURIComponent(message)}`;
             const mailtoLink = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body.replace(/\n/g, '%0A')}`;
         
             console.log("Generated mailto link:", mailtoLink); // Debugging log
