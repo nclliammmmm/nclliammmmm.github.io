@@ -26,22 +26,22 @@
 
         function sendEmail(event) {
             event.preventDefault(); // Prevent default form submission
-
+        
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const message = document.getElementById('message').value.trim();
-
+        
             if (!name || !email || !message) {
                 alert("Please fill in all fields.");
                 return;
             }
-
+        
             const subject = encodeURIComponent(`Support Request from ${name}`);
-            const body = encodeURIComponent(`Name: ${name}%0AEmail: ${email}%0A%0A${message}`);
-            const mailtoLink = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`;
-
+            const body = `Name: ${encodeURIComponent(name)}\nEmail: ${encodeURIComponent(email)}\n\n${encodeURIComponent(message)}`;
+            const mailtoLink = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body.replace(/\n/g, '%0A')}`;
+        
             console.log("Generated mailto link:", mailtoLink); // Debugging log
-
+        
             // Open email client
             window.location.href = mailtoLink;
         }
