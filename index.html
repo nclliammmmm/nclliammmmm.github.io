@@ -4,34 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cloud Works</title>
-    <!-- Include Google Fonts for a clean appearance -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Include Tailwind CSS for layout and styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        function sendEmail(event) {
-            event.preventDefault(); // Prevent default form submission
-    
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-    
-            if (!name || !email || !message) {
-                alert("Please fill in all fields.");
-                return;
-            }
-    
-            const subject = encodeURIComponent(`Support Request from ${name}`);
-            const body = encodeURIComponent(`Name: ${name}%0AEmail: ${email}%0A%0A${message}`);
-    
-            const mailtoLink = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`;
-    
-            window.location.href = mailtoLink;
-        }
-    </script>
     <script>
         // Initialize Tailwind CSS
         tailwind.config = {
@@ -44,6 +23,28 @@
                 },
             },
         };
+
+        function sendEmail(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !message) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            const subject = encodeURIComponent(`Support Request from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}%0AEmail: ${email}%0A%0A${message}`);
+            const mailtoLink = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`;
+
+            console.log("Generated mailto link:", mailtoLink); // Debugging log
+
+            // Open email client
+            window.location.href = mailtoLink;
+        }
     </script>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -53,8 +54,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-4xl font-bold">Cloud Works</h1>
             <nav role="navigation">
-                <ul class="flex space-x-4">
-                </ul>
+                <ul class="flex space-x-4"></ul>
             </nav>
         </div>
     </header>
@@ -95,12 +95,6 @@
     <footer class="bg-secondary text-black text-center py-4">
         <p>&copy; 2025 Cloud Works. All rights reserved.</p>
     </footer>
-
-    <script>
-        function sendEmail(event) {
-            // Rest of the sendEmail function remains the same
-        }
-    </script>
 
 </body>
 </html>
