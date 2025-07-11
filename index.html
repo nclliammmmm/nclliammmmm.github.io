@@ -45,20 +45,34 @@
 </head>
 <body class="bg-animated min-h-screen">
 
-    <!-- Navigation -->
-    <header class="fixed w-full top-0 left-0 z-20 bg-white bg-opacity-70 backdrop-filter backdrop-blur shadow">
+    <!-- Redesigned Navigation -->
+    <header class="fixed w-full top-0 left-0 z-20 bg-white bg-opacity-80 backdrop-filter backdrop-blur shadow">
         <nav class="container mx-auto flex items-center justify-between py-4 px-6">
-            <h1 class="text-2xl font-bold text-blue-700 tracking-wide">Cloud Works</h1>
-            <ul class="flex gap-6 text-lg font-medium">
-                <li><a href="#about" class="hover:text-blue-600 transition">About</a></li>
-                <li><a href="#playground" class="hover:text-blue-600 transition">Playground</a></li>
-                <li><button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Contact IT</button></li>
+            <!-- Logo and Title -->
+            <div class="flex items-center gap-3">
+                <span class="inline-block w-10 h-10 rounded-full bg-gradient-to-tr from-blue-400 to-blue-700 flex items-center justify-center shadow">
+                    <!-- Simple cloud SVG for logo -->
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z"/>
+                    </svg>
+                </span>
+                <span class="text-2xl font-extrabold text-blue-700 tracking-wide">Cloud Works</span>
+            </div>
+            <!-- Navigation Links -->
+            <ul class="flex gap-3 md:gap-8 text-lg font-medium items-center">
+                <li><a href="#about" class="hover:text-blue-600 transition px-3 py-1 rounded hover:bg-blue-50">About</a></li>
+                <li><a href="#tech" class="hover:text-blue-600 transition px-3 py-1 rounded hover:bg-blue-50">Tech Details</a></li>
+                <li>
+                    <button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition shadow font-semibold">
+                        Contact IT
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
 
     <!-- Main Content -->
-    <main class="pt-28 container mx-auto">
+    <main class="pt-32 container mx-auto">
 
         <!-- About Section -->
         <section id="about" class="relative flex flex-col items-center justify-center py-24 mb-12 rounded-xl shadow-xl overflow-hidden bg-white bg-opacity-80">
@@ -74,17 +88,26 @@
             </div>
         </section>
 
-        <!-- Playground Section -->
-        <section id="playground" class="relative py-24 mb-12 rounded-xl shadow-xl overflow-hidden bg-white bg-opacity-80 flex flex-col items-center justify-center">
-            <div class="absolute inset-0 pointer-events-none z-0" style="background: linear-gradient(135deg, #fcb69f 0%, #ffecd2 100%); opacity:0.35;"></div>
-            <div class="relative z-10 max-w-xl mx-auto text-center">
-                <h2 class="text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-400">Experimental Playground 🚀</h2>
-                <p class="text-xl text-gray-700 mb-6">
-                    Test new ideas, play with features, and spark innovation! This is a safe space for exploration—where code meets imagination.
-                </p>
-                <button onclick="openModal()" class="bg-gradient-to-r from-pink-400 to-yellow-400 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition transform">
-                    Contact IT
-                </button>
+        <!-- Tech Details Section -->
+        <section id="tech" class="relative py-24 mb-12 rounded-xl shadow-xl overflow-hidden bg-white bg-opacity-80 flex flex-col items-center justify-center">
+            <div class="absolute inset-0 pointer-events-none z-0" style="background: linear-gradient(135deg, #c3ec52 0%, #0ba29d 100%); opacity:0.25;"></div>
+            <div class="relative z-10 max-w-2xl mx-auto text-center">
+                <h2 class="text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-600">Tech Details & Server Insights 🖥️</h2>
+                <div class="text-xl text-gray-700 mb-6">
+                    <ul class="text-left mx-auto max-w-xl list-disc list-inside space-y-3">
+                        <li><span class="font-semibold text-blue-600">Cloud-Based Infrastructure:</span> Our IT systems are built on scalable cloud servers that ensure high availability and security for your data.</li>
+                        <li><span class="font-semibold text-blue-600">Server Uptime:</span> We maintain a 99.99% uptime guarantee, monitored 24/7 with automated alerts and rapid incident response.</li>
+                        <li><span class="font-semibold text-blue-600">Data Protection:</span> All user data is encrypted at rest and in transit using industry standard protocols (AES-256, TLS 1.3).</li>
+                        <li><span class="font-semibold text-blue-600">Automated Backups:</span> Nightly backups are performed and retained for 30 days to safeguard your information.</li>
+                        <li><span class="font-semibold text-blue-600">Support Tech Stack:</span> Our helpdesk runs on modern tools including Docker, Node.js, and Kubernetes for scalable microservices.</li>
+                        <li><span class="font-semibold text-blue-600">Firewall & Threat Protection:</span> All endpoints are protected by next-generation firewalls and real-time threat intelligence.</li>
+                    </ul>
+                </div>
+                <div class="mt-8 flex justify-center">
+                    <button onclick="openModal()" class="bg-gradient-to-r from-green-400 to-blue-600 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition transform">
+                        Contact IT
+                    </button>
+                </div>
             </div>
         </section>
 
