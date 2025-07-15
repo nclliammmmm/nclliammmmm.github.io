@@ -15,9 +15,15 @@
         main { flex: 1; }
         .nav-active { background: linear-gradient(90deg, #3490dc 0%, #38b2ac 100%); color: #fff; }
         footer { margin-top: 0; }
+        #announcement-bar { transition: background 0.3s; }
     </style>
 </head>
 <body>
+
+    <!-- Announcements Bar -->
+    <div id="announcement-bar" class="w-full text-center py-2 bg-yellow-200 text-yellow-800 font-semibold shadow" style="display:none;">
+        <span id="announcement-message"></span>
+    </div>
 
     <!-- Navigation Tabs -->
     <header class="fixed w-full top-0 left-0 z-20 bg-white bg-opacity-90 shadow-md">
@@ -47,7 +53,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="pt-28 container mx-auto w-full">
+    <main class="pt-36 container mx-auto w-full">
 
         <!-- MAIN PAGE SCREEN -->
         <section id="screen-main">
@@ -84,37 +90,91 @@
                     </div>
                 </div>
                 <p class="mt-6 text-gray-500 text-sm">Status is simulated for demo purposes. Real checks require a backend server.</p>
+                <div class="mt-6">
+                    <span id="maintenance-indicator" class="px-3 py-1 rounded font-bold text-orange-700 bg-orange-200" style="display:none;">Maintenance Mode Active</span>
+                </div>
             </div>
         </section>
 
-        <!-- ADMIN STATUS SCREEN (for changing statuses & logging into services) -->
+        <!-- ADMIN STATUS SCREEN (for changing statuses & logging into services, plus all new features) -->
         <section id="screen-admin" class="hidden">
             <div class="max-w-2xl mx-auto bg-white bg-opacity-95 rounded-xl shadow-lg p-8 mt-8">
                 <h2 class="text-3xl font-extrabold mb-4 text-green-600">Admin Status Panel</h2>
+                <div class="space-y-6 mb-8">
+                    <!-- Quick Links -->
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">Quick Links</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="file://192.168.1.77/files" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
+                            <span class="font-bold text-blue-700">File Server / NAS</span>
+                            <span class="text-gray-500 text-sm">\\192.168.1.77\files</span>
+                        </a>
+                        <a href="http://192.168.1.77:631" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
+                            <span class="font-bold text-blue-700">Printer Management</span>
+                            <span class="text-gray-500 text-sm">Web Interface</span>
+                        </a>
+                        <a href="http://192.168.1.1" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
+                            <span class="font-bold text-blue-700">Router / Firewall</span>
+                            <span class="text-gray-500 text-sm">192.168.1.1</span>
+                        </a>
+                        <a href="https://www.speedtest.net/" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
+                            <span class="font-bold text-blue-700">Network Speed Test</span>
+                        </a>
+                        <a href="http://192.168.1.77:3000" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
+                            <span class="font-bold text-blue-700">System Resource Monitor</span>
+                            <span class="text-gray-500 text-sm">Grafana/Prometheus</span>
+                        </a>
+                    </div>
+                </div>
                 <div class="space-y-6">
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">Service Controls</h3>
                     <div>
                         <label class="text-xl font-bold mr-4">Plex</label>
                         <select id="admin-plex" class="rounded px-3 py-1 border border-gray-300">
                             <option value="Online">Online</option>
                             <option value="Offline">Offline</option>
+                            <option value="Maintenance">Maintenance</option>
                         </select>
                         <button onclick="openPlexLogin()" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Plex</button>
+                        <button onclick="simRestart('Plex')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Restart</button>
+                        <button onclick="simShutdown('Plex')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Shutdown</button>
                     </div>
                     <div>
                         <label class="text-xl font-bold mr-4">Jellyfin</label>
                         <select id="admin-jellyfin" class="rounded px-3 py-1 border border-gray-300">
                             <option value="Online">Online</option>
                             <option value="Offline">Offline</option>
+                            <option value="Maintenance">Maintenance</option>
                         </select>
                         <button onclick="openJellyfinLogin()" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Jellyfin</button>
+                        <button onclick="simRestart('Jellyfin')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Restart</button>
+                        <button onclick="simShutdown('Jellyfin')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Shutdown</button>
                     </div>
                     <div>
                         <label class="text-xl font-bold mr-4">DNS (192.168.1.77)</label>
                         <select id="admin-dns" class="rounded px-3 py-1 border border-gray-300">
                             <option value="Online">Online</option>
                             <option value="Offline">Offline</option>
+                            <option value="Maintenance">Maintenance</option>
                         </select>
                         <button onclick="openRDPLogin()" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Remote Desktop</button>
+                        <button onclick="simRestart('DNS')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Restart</button>
+                        <button onclick="simShutdown('DNS')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Shutdown</button>
+                    </div>
+                </div>
+                <div class="space-y-6 mt-8">
+                    <!-- Wake-on-LAN Simulated -->
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">Network Tools</h3>
+                    <button onclick="simWakeOnLAN()" class="bg-blue-500 text-white px-6 py-2 rounded font-bold hover:bg-blue-600 transition">Wake-on-LAN</button>
+                    <!-- Broadcast message -->
+                    <div class="mt-4">
+                        <input type="text" id="broadcast-input" placeholder="Broadcast message..." class="px-3 py-1 rounded border border-gray-300 w-2/3">
+                        <button onclick="simBroadcast()" class="bg-yellow-500 text-white px-4 py-1 rounded font-bold hover:bg-yellow-600 transition ml-2">Send Broadcast</button>
+                    </div>
+                    <!-- Announcements Bar Control -->
+                    <div class="mt-4">
+                        <input type="text" id="announcement-input" placeholder="Update announcement bar..." class="px-3 py-1 rounded border border-gray-300 w-2/3">
+                        <button onclick="simAnnounce()" class="bg-yellow-700 text-white px-4 py-1 rounded font-bold hover:bg-yellow-800 transition ml-2">Update Announcement</button>
+                        <button onclick="simClearAnnounce()" class="bg-gray-400 text-white px-4 py-1 rounded font-bold hover:bg-gray-500 ml-2">Clear</button>
                     </div>
                 </div>
                 <button onclick="saveAdminStatus()" class="mt-8 bg-green-500 text-white px-6 py-2 rounded font-bold hover:bg-green-600 transition">Save Status</button>
@@ -127,6 +187,7 @@
             <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
                 <button onclick="closePlexLogin()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
                 <h2 class="text-2xl font-bold mb-6 text-blue-600">Login to Plex</h2>
+                <a href="http://192.168.1.77:32400/web" target="_blank" class="block text-blue-700 font-bold mb-3 hover:underline">Go to Plex Web</a>
                 <form onsubmit="fakeServiceLogin(event, 'plex')" class="space-y-4">
                     <div>
                         <label for="plex-username" class="block text-left font-semibold">Username:</label>
@@ -146,6 +207,7 @@
             <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
                 <button onclick="closeJellyfinLogin()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
                 <h2 class="text-2xl font-bold mb-6 text-blue-600">Login to Jellyfin</h2>
+                <a href="http://192.168.1.77:8096/web/index.html" target="_blank" class="block text-blue-700 font-bold mb-3 hover:underline">Go to Jellyfin Web</a>
                 <form onsubmit="fakeServiceLogin(event, 'jellyfin')" class="space-y-4">
                     <div>
                         <label for="jellyfin-username" class="block text-left font-semibold">Username:</label>
@@ -165,6 +227,7 @@
             <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
                 <button onclick="closeRDPLogin()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
                 <h2 class="text-2xl font-bold mb-6 text-blue-600">Login to Remote Desktop</h2>
+                <a href="rdp://192.168.1.77" class="block text-blue-700 font-bold mb-3 hover:underline">Connect to RDP (192.168.1.77)</a>
                 <form onsubmit="fakeServiceLogin(event, 'rdp')" class="space-y-4">
                     <div>
                         <label for="rdp-username" class="block text-left font-semibold">Username:</label>
@@ -252,6 +315,20 @@
 
     <!-- Scripts: Navigation, Modal, and Login/Admin Status -->
     <script>
+        // Announcements bar logic
+        let announcementText = "";
+        function updateAnnouncementBar() {
+            const bar = document.getElementById('announcement-bar');
+            const msg = document.getElementById('announcement-message');
+            if (announcementText) {
+                bar.style.display = "block";
+                msg.textContent = announcementText;
+            } else {
+                bar.style.display = "none";
+                msg.textContent = "";
+            }
+        }
+
         // Navigation logic
         const screens = ['main', 'status', 'downloads', 'admin'];
         function showScreen(name) {
@@ -262,6 +339,7 @@
             });
         }
         showScreen('main');
+        updateAnnouncementBar();
 
         // Contact Modal logic
         const modal = document.getElementById('contactModal');
@@ -323,10 +401,11 @@
                 loginBtn.textContent = "Logout";
                 loginBtn.onclick = logoutAdmin;
                 showScreen('admin');
-                // Set admin panel selectors to current status
                 document.getElementById('admin-plex').value = statusStore.plex;
                 document.getElementById('admin-jellyfin').value = statusStore.jellyfin;
                 document.getElementById('admin-dns').value = statusStore.dns;
+                // Set maintenance mode indicator
+                updateMaintenanceIndicator();
             } else {
                 alert("Invalid login. Try username: admin, password: password");
             }
@@ -345,18 +424,29 @@
             dns: "Online"
         };
         function updateStatusDisplay() {
-            document.getElementById('plex-status').textContent = statusStore.plex;
-            document.getElementById('plex-status').className = statusStore.plex === "Online"
-                ? "px-3 py-1 rounded font-semibold bg-green-200 text-green-800"
-                : "px-3 py-1 rounded font-semibold bg-red-200 text-red-800";
-            document.getElementById('jellyfin-status').textContent = statusStore.jellyfin;
-            document.getElementById('jellyfin-status').className = statusStore.jellyfin === "Online"
-                ? "px-3 py-1 rounded font-semibold bg-green-200 text-green-800"
-                : "px-3 py-1 rounded font-semibold bg-red-200 text-red-800";
-            document.getElementById('dns-status').textContent = statusStore.dns;
-            document.getElementById('dns-status').className = statusStore.dns === "Online"
-                ? "px-3 py-1 rounded font-semibold bg-green-200 text-green-800"
-                : "px-3 py-1 rounded font-semibold bg-red-200 text-red-800";
+            displayStatus('plex-status', statusStore.plex);
+            displayStatus('jellyfin-status', statusStore.jellyfin);
+            displayStatus('dns-status', statusStore.dns);
+            updateMaintenanceIndicator();
+        }
+        function displayStatus(id, status) {
+            const el = document.getElementById(id);
+            el.textContent = status;
+            if (status === "Online") {
+                el.className = "px-3 py-1 rounded font-semibold bg-green-200 text-green-800";
+            } else if (status === "Offline") {
+                el.className = "px-3 py-1 rounded font-semibold bg-red-200 text-red-800";
+            } else if (status === "Maintenance") {
+                el.className = "px-3 py-1 rounded font-semibold bg-orange-200 text-orange-800";
+            }
+        }
+        function updateMaintenanceIndicator() {
+            const m = document.getElementById('maintenance-indicator');
+            if (statusStore.plex === "Maintenance" || statusStore.jellyfin === "Maintenance" || statusStore.dns === "Maintenance") {
+                m.style.display = "inline-block";
+            } else {
+                m.style.display = "none";
+            }
         }
         updateStatusDisplay();
 
@@ -418,6 +508,37 @@
             if (service === "plex") closePlexLogin();
             if (service === "jellyfin") closeJellyfinLogin();
             if (service === "rdp") closeRDPLogin();
+        }
+
+        // Simulated Wake-on-LAN
+        function simWakeOnLAN() {
+            alert("Wake-on-LAN packet sent to all sleeping devices (simulated)");
+        }
+        // Simulated Restart/Shutdown
+        function simRestart(service) {
+            alert(`${service} is restarting (simulated)`);
+        }
+        function simShutdown(service) {
+            alert(`${service} is shutting down (simulated)`);
+        }
+        // Simulated Broadcast
+        function simBroadcast() {
+            const msg = document.getElementById('broadcast-input').value.trim();
+            if (!msg) { alert("Enter a broadcast message."); return; }
+            alert(`Broadcast to all users: ${msg} (simulated)`);
+            document.getElementById('broadcast-input').value = "";
+        }
+        // Announcements bar controls
+        function simAnnounce() {
+            const msg = document.getElementById('announcement-input').value.trim();
+            if (!msg) { alert("Enter an announcement."); return; }
+            announcementText = msg;
+            updateAnnouncementBar();
+            document.getElementById('announcement-input').value = "";
+        }
+        function simClearAnnounce() {
+            announcementText = "";
+            updateAnnouncementBar();
         }
     </script>
 </body>
