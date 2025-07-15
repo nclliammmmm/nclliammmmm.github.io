@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Cloud Works Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon (same as logo in top left) -->
+    <!-- Favicon (Logo SVG) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%233490dc'/%3E%3Cpath d='M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z' fill='white'/%3E%3C/svg%3E">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -99,7 +99,7 @@
             </div>
         </section>
 
-        <!-- ADMIN STATUS SCREEN (for changing statuses & logging into services, plus all new features) -->
+        <!-- ADMIN STATUS SCREEN (direct links to services, all features) -->
         <section id="screen-admin" class="hidden">
             <div class="max-w-2xl mx-auto bg-white bg-opacity-95 rounded-xl shadow-lg p-8 mt-8">
                 <h2 class="text-3xl font-extrabold mb-4 text-green-600">Admin Status Panel</h2>
@@ -165,15 +165,12 @@
                     </div>
                 </div>
                 <div class="space-y-6 mt-8">
-                    <!-- Wake-on-LAN Simulated -->
                     <h3 class="text-xl font-bold mb-2 text-blue-700">Network Tools</h3>
                     <button onclick="simWakeOnLAN()" class="bg-blue-500 text-white px-6 py-2 rounded font-bold hover:bg-blue-600 transition">Wake-on-LAN</button>
-                    <!-- Broadcast message -->
                     <div class="mt-4">
                         <input type="text" id="broadcast-input" placeholder="Broadcast message..." class="px-3 py-1 rounded border border-gray-300 w-2/3">
                         <button onclick="simBroadcast()" class="bg-yellow-500 text-white px-4 py-1 rounded font-bold hover:bg-yellow-600 transition ml-2">Send Broadcast</button>
                     </div>
-                    <!-- Announcements Bar Control -->
                     <div class="mt-4">
                         <input type="text" id="announcement-input" placeholder="Update announcement bar..." class="px-3 py-1 rounded border border-gray-300 w-2/3">
                         <button onclick="simAnnounce()" class="bg-yellow-700 text-white px-4 py-1 rounded font-bold hover:bg-yellow-800 transition ml-2">Update Announcement</button>
