@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Cloud Works Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon (same as logo in top left) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%233490dc'/%3E%3Cpath d='M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z' fill='white'/%3E%3C/svg%3E">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS -->
@@ -29,6 +31,7 @@
     <header class="fixed w-full top-0 left-0 z-20 bg-white bg-opacity-90 shadow-md">
         <nav class="container mx-auto flex justify-between items-center py-3 px-4">
             <div class="flex items-center gap-2">
+                <!-- Logo SVG -->
                 <span class="inline-block w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-blue-700 flex items-center justify-center shadow">
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z"/></svg>
                 </span>
@@ -134,7 +137,7 @@
                             <option value="Offline">Offline</option>
                             <option value="Maintenance">Maintenance</option>
                         </select>
-                        <button onclick="openPlexLogin()" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Plex</button>
+                        <a href="http://192.168.1.77:32400/web" target="_blank" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Plex</a>
                         <button onclick="simRestart('Plex')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Restart</button>
                         <button onclick="simShutdown('Plex')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Shutdown</button>
                     </div>
@@ -145,7 +148,7 @@
                             <option value="Offline">Offline</option>
                             <option value="Maintenance">Maintenance</option>
                         </select>
-                        <button onclick="openJellyfinLogin()" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Jellyfin</button>
+                        <a href="http://192.168.1.77:8096/web/index.html" target="_blank" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Jellyfin</a>
                         <button onclick="simRestart('Jellyfin')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Restart</button>
                         <button onclick="simShutdown('Jellyfin')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Shutdown</button>
                     </div>
@@ -156,7 +159,7 @@
                             <option value="Offline">Offline</option>
                             <option value="Maintenance">Maintenance</option>
                         </select>
-                        <button onclick="openRDPLogin()" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Remote Desktop</button>
+                        <a href="rdp://192.168.1.77" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Remote Desktop</a>
                         <button onclick="simRestart('DNS')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Restart</button>
                         <button onclick="simShutdown('DNS')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Shutdown</button>
                     </div>
@@ -181,66 +184,6 @@
                 <button onclick="logoutAdmin()" class="mt-8 ml-4 bg-gray-300 text-gray-700 px-6 py-2 rounded font-bold hover:bg-gray-400 transition">Logout</button>
             </div>
         </section>
-
-        <!-- Plex Login Modal -->
-        <div id="plexLoginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 opacity-0 pointer-events-none">
-            <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
-                <button onclick="closePlexLogin()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
-                <h2 class="text-2xl font-bold mb-6 text-blue-600">Login to Plex</h2>
-                <a href="http://192.168.1.77:32400/web" target="_blank" class="block text-blue-700 font-bold mb-3 hover:underline">Go to Plex Web</a>
-                <form onsubmit="fakeServiceLogin(event, 'plex')" class="space-y-4">
-                    <div>
-                        <label for="plex-username" class="block text-left font-semibold">Username:</label>
-                        <input type="text" id="plex-username" name="plex-username" required class="w-full border border-gray-300 p-2 rounded"/>
-                    </div>
-                    <div>
-                        <label for="plex-password" class="block text-left font-semibold">Password:</label>
-                        <input type="password" id="plex-password" name="plex-password" required class="w-full border border-gray-300 p-2 rounded"/>
-                    </div>
-                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded hover:bg-blue-700 transition">Login</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Jellyfin Login Modal -->
-        <div id="jellyfinLoginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 opacity-0 pointer-events-none">
-            <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
-                <button onclick="closeJellyfinLogin()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
-                <h2 class="text-2xl font-bold mb-6 text-blue-600">Login to Jellyfin</h2>
-                <a href="http://192.168.1.77:8096/web/index.html" target="_blank" class="block text-blue-700 font-bold mb-3 hover:underline">Go to Jellyfin Web</a>
-                <form onsubmit="fakeServiceLogin(event, 'jellyfin')" class="space-y-4">
-                    <div>
-                        <label for="jellyfin-username" class="block text-left font-semibold">Username:</label>
-                        <input type="text" id="jellyfin-username" name="jellyfin-username" required class="w-full border border-gray-300 p-2 rounded"/>
-                    </div>
-                    <div>
-                        <label for="jellyfin-password" class="block text-left font-semibold">Password:</label>
-                        <input type="password" id="jellyfin-password" name="jellyfin-password" required class="w-full border border-gray-300 p-2 rounded"/>
-                    </div>
-                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded hover:bg-blue-700 transition">Login</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Remote Desktop Login Modal -->
-        <div id="rdpLoginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 opacity-0 pointer-events-none">
-            <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
-                <button onclick="closeRDPLogin()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
-                <h2 class="text-2xl font-bold mb-6 text-blue-600">Login to Remote Desktop</h2>
-                <a href="rdp://192.168.1.77" class="block text-blue-700 font-bold mb-3 hover:underline">Connect to RDP (192.168.1.77)</a>
-                <form onsubmit="fakeServiceLogin(event, 'rdp')" class="space-y-4">
-                    <div>
-                        <label for="rdp-username" class="block text-left font-semibold">Username:</label>
-                        <input type="text" id="rdp-username" name="rdp-username" required class="w-full border border-gray-300 p-2 rounded"/>
-                    </div>
-                    <div>
-                        <label for="rdp-password" class="block text-left font-semibold">Password:</label>
-                        <input type="password" id="rdp-password" name="rdp-password" required class="w-full border border-gray-300 p-2 rounded"/>
-                    </div>
-                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded hover:bg-blue-700 transition">Login</button>
-                </form>
-            </div>
-        </div>
 
         <!-- DOWNLOADS SCREEN -->
         <section id="screen-downloads" class="hidden">
@@ -404,7 +347,6 @@
                 document.getElementById('admin-plex').value = statusStore.plex;
                 document.getElementById('admin-jellyfin').value = statusStore.jellyfin;
                 document.getElementById('admin-dns').value = statusStore.dns;
-                // Set maintenance mode indicator
                 updateMaintenanceIndicator();
             } else {
                 alert("Invalid login. Try username: admin, password: password");
@@ -457,57 +399,6 @@
             updateStatusDisplay();
             alert("Status updated!");
             showScreen('status');
-        }
-
-        // Service login modals (simulated)
-        function openPlexLogin() {
-            document.getElementById('plexLoginModal').style.opacity = '1';
-            document.getElementById('plexLoginModal').style.pointerEvents = 'auto';
-        }
-        function closePlexLogin() {
-            document.getElementById('plexLoginModal').style.opacity = '0';
-            document.getElementById('plexLoginModal').style.pointerEvents = 'none';
-        }
-        document.getElementById('plexLoginModal').addEventListener('click', function(e) {
-            if (e.target === this) closePlexLogin();
-        });
-
-        function openJellyfinLogin() {
-            document.getElementById('jellyfinLoginModal').style.opacity = '1';
-            document.getElementById('jellyfinLoginModal').style.pointerEvents = 'auto';
-        }
-        function closeJellyfinLogin() {
-            document.getElementById('jellyfinLoginModal').style.opacity = '0';
-            document.getElementById('jellyfinLoginModal').style.pointerEvents = 'none';
-        }
-        document.getElementById('jellyfinLoginModal').addEventListener('click', function(e) {
-            if (e.target === this) closeJellyfinLogin();
-        });
-
-        function openRDPLogin() {
-            document.getElementById('rdpLoginModal').style.opacity = '1';
-            document.getElementById('rdpLoginModal').style.pointerEvents = 'auto';
-        }
-        function closeRDPLogin() {
-            document.getElementById('rdpLoginModal').style.opacity = '0';
-            document.getElementById('rdpLoginModal').style.pointerEvents = 'none';
-        }
-        document.getElementById('rdpLoginModal').addEventListener('click', function(e) {
-            if (e.target === this) closeRDPLogin();
-        });
-
-        function fakeServiceLogin(event, service) {
-            event.preventDefault();
-            const username = event.target.querySelector('input[type="text"]').value.trim();
-            const password = event.target.querySelector('input[type="password"]').value.trim();
-            if (!username || !password) {
-                alert("Please enter both username and password.");
-                return;
-            }
-            alert(`Logged into ${service.charAt(0).toUpperCase()+service.slice(1)} as ${username} (simulated)`);
-            if (service === "plex") closePlexLogin();
-            if (service === "jellyfin") closeJellyfinLogin();
-            if (service === "rdp") closeRDPLogin();
         }
 
         // Simulated Wake-on-LAN
