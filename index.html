@@ -122,6 +122,7 @@
                         <a href="https://www.speedtest.net/" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
                             <span class="font-bold text-blue-700">Network Speed Test</span>
                         </a>
+                        <!-- REMOVED SYSTEM RESOURCE MONITOR AND GRAFANA LINK -->
                     </div>
                 </div>
                 <div class="space-y-6">
@@ -239,7 +240,6 @@
                     <input type="password" id="login-password" name="login-password" required class="w-full border border-gray-300 p-2 rounded"/>
                 </div>
                 <button type="submit" class="bg-green-500 text-white font-bold px-6 py-2 rounded hover:bg-green-600 transition">Login</button>
-                <p class="mt-4 text-sm text-gray-600">Demo login:<br><strong>Username:</strong> <span class="text-blue-700">admin</span><br><strong>Password:</strong> <span class="text-blue-700">password</span></p>
             </form>
         </div>
     </div>
@@ -327,11 +327,12 @@
             if (e.target === this) closeLoginModal();
         });
 
+        // UPDATED LOGIN: username liamr, password Cloud@2025!
         function fakeLogin(event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value.trim();
             const password = document.getElementById('login-password').value.trim();
-            if (username === "admin" && password === "password") {
+            if (username === "liamr" && password === "Cloud@2025!") {
                 isAdmin = true;
                 closeLoginModal();
                 loginBtn.textContent = "Logout";
@@ -342,7 +343,7 @@
                 document.getElementById('admin-dns').value = statusStore.dns;
                 updateMaintenanceIndicator();
             } else {
-                alert("Invalid login. Try username: admin, password: password");
+                alert("Invalid login.");
             }
         }
         function logoutAdmin() {
