@@ -2,181 +2,122 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Cloud Works Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Works - Modern Experience</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'IBM Plex Sans', sans-serif;
-        }
-        .bg-animated {
-            background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
-            animation: gradientMove 7s ease-in-out infinite;
-            background-size: 200% 200%;
-        }
-        @keyframes gradientMove {
-            0%, 100% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-        }
-        .modal-enter {
-            transform: scale(0.8);
-            opacity: 0;
-            transition: transform 0.4s, opacity 0.4s;
-        }
-        .modal-enter-active {
-            transform: scale(1);
-            opacity: 1;
-        }
-        .modal-exit {
-            transform: scale(1);
-            opacity: 1;
-            transition: transform 0.4s, opacity 0.4s;
-        }
-        .modal-exit-active {
-            transform: scale(0.8);
-            opacity: 0;
-        }
+        body { font-family: 'IBM Plex Sans', sans-serif; }
+        .nav-active { background: linear-gradient(90deg, #3490dc 0%, #38b2ac 100%); color: #fff; }
     </style>
 </head>
-<body class="bg-animated min-h-screen">
+<body class="min-h-screen bg-gradient-to-br from-blue-100 to-green-100">
 
-    <!-- Redesigned Navigation -->
-    <header class="fixed w-full top-0 left-0 z-20 bg-white bg-opacity-80 backdrop-filter backdrop-blur shadow">
-        <nav class="container mx-auto flex items-center justify-between py-4 px-6">
-            <div class="flex items-center gap-3">
-                <span class="inline-block w-10 h-10 rounded-full bg-gradient-to-tr from-blue-400 to-blue-700 flex items-center justify-center shadow">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
-                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z"/>
-                    </svg>
+    <!-- Navigation Tabs -->
+    <header class="fixed w-full top-0 left-0 z-20 bg-white bg-opacity-90 shadow-md">
+        <nav class="container mx-auto flex justify-between items-center py-3 px-4">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-blue-700 flex items-center justify-center shadow">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z"/></svg>
                 </span>
-                <span class="text-2xl font-extrabold text-blue-700 tracking-wide">Cloud Works</span>
+                <span class="text-xl font-bold text-blue-700">Cloud Works</span>
             </div>
-            <ul class="flex gap-3 md:gap-8 text-lg font-medium items-center">
-                <li><a href="#about" class="hover:text-blue-600 transition px-3 py-1 rounded hover:bg-blue-50">About</a></li>
-                <li><a href="#tech" class="hover:text-blue-600 transition px-3 py-1 rounded hover:bg-blue-50">Tech Details</a></li>
-                <li>
-                    <button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition shadow font-semibold">
-                        Contact IT
-                    </button>
-                </li>
+            <ul class="flex gap-2 md:gap-6 text-md font-medium items-center">
+                <li><button onclick="showScreen('status')" id="tab-status" class="px-3 py-2 rounded transition">Status</button></li>
+                <li><button onclick="showScreen('portal')" id="tab-portal" class="px-3 py-2 rounded transition">User Portal</button></li>
+                <li><button onclick="showScreen('downloads')" id="tab-downloads" class="px-3 py-2 rounded transition">Downloads</button></li>
             </ul>
         </nav>
     </header>
 
     <!-- Main Content -->
-    <main class="pt-32 container mx-auto">
+    <main class="pt-24 container mx-auto">
 
-        <!-- About Section -->
-        <section id="about" class="relative flex flex-col items-center justify-center py-24 mb-12 rounded-xl shadow-xl overflow-hidden bg-white bg-opacity-80">
-            <div class="absolute inset-0 pointer-events-none z-0" style="background: radial-gradient(circle at 70% 30%, #a8edea 0%, #fed6e3 100%); opacity:0.4;"></div>
-            <div class="relative z-10 max-w-2xl mx-auto text-center">
-                <h2 class="text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-400">Welcome to Cloud Works</h2>
-                <p class="text-xl text-gray-700 mb-8">
-                    We offer creative IT help for registered users. Need support? Use our interactive playground or reach out using the contact form!
-                </p>
-                <button onclick="openModal()" class="bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition transform">
-                    Get Support
-                </button>
+        <!-- STATUS SCREEN -->
+        <section id="screen-status" class="hidden">
+            <div class="max-w-2xl mx-auto bg-white bg-opacity-90 rounded-xl shadow-lg p-8 mt-8">
+                <h2 class="text-3xl font-extrabold mb-4 text-blue-600">Service Status</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <span class="text-xl font-bold">Plex</span>
+                        <span id="plex-status" class="px-3 py-1 rounded font-semibold bg-green-200 text-green-800">Online</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-xl font-bold">Jellyfin</span>
+                        <span id="jellyfin-status" class="px-3 py-1 rounded font-semibold bg-red-200 text-red-800">Offline</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-xl font-bold">DNS (192.168.1.77)</span>
+                        <span id="dns-status" class="px-3 py-1 rounded font-semibold bg-green-200 text-green-800">Online</span>
+                    </div>
+                </div>
+                <p class="mt-6 text-gray-500 text-sm">Status is simulated for demo purposes. Real checks require a backend server.</p>
             </div>
         </section>
 
-        <!-- Tech Details Section (IT Support Focus) -->
-        <section id="tech" class="relative py-24 mb-12 rounded-xl shadow-xl overflow-hidden bg-white bg-opacity-80 flex flex-col items-center justify-center">
-            <div class="absolute inset-0 pointer-events-none z-0" style="background: linear-gradient(135deg, #c3ec52 0%, #0ba29d 100%); opacity:0.25;"></div>
-            <div class="relative z-10 max-w-2xl mx-auto text-center">
-                <h2 class="text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-600">Tech Details & IT Services 🛠️</h2>
-                <div class="text-xl text-gray-700 mb-6">
-                    <ul class="text-left mx-auto max-w-xl list-disc list-inside space-y-3">
-                        <li><span class="font-semibold text-blue-600">Device Troubleshooting:</span> Assistance with computers, laptops, printers, and mobile devices.</li>
-                        <li><span class="font-semibold text-blue-600">Software Support:</span> Help installing, updating, and configuring common applications (Office, browsers, etc).</li>
-                        <li><span class="font-semibold text-blue-600">Account Help:</span> Support with login issues, password resets, and user access for registered members.</li>
-                        <li><span class="font-semibold text-blue-600">Network Questions:</span> Guidance on Wi-Fi connectivity, VPNs, and network troubleshooting.</li>
-                        <li><span class="font-semibold text-blue-600">Advice & Recommendations:</span> Get suggestions for best practices, security tips, and IT upgrades.</li>
-                        <li><span class="font-semibold text-blue-600">Personalised Support:</span> One-to-one help tailored to your specific IT challenges and needs.</li>
+        <!-- USER PORTAL SCREEN -->
+        <section id="screen-portal" class="hidden">
+            <div class="max-w-2xl mx-auto bg-white bg-opacity-90 rounded-xl shadow-lg p-8 mt-8">
+                <h2 class="text-3xl font-extrabold mb-4 text-blue-600">User Portal</h2>
+                <div class="text-lg text-gray-700 mb-6">
+                    Welcome, <span class="font-semibold text-blue-500">Registered User</span>!
+                    <ul class="list-disc list-inside mt-4 space-y-2">
+                        <li>View and track your support requests</li>
+                        <li>Update your contact information</li>
+                        <li>Access helpful IT resources and tips</li>
+                        <li>Contact IT support directly from this portal</li>
                     </ul>
                 </div>
                 <div class="mt-8 flex justify-center">
+                    <button class="bg-gradient-to-r from-blue-400 to-green-400 text-white font-bold px-8 py-3 rounded-full shadow hover:scale-105 transition transform">
+                        Coming Soon!
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="text-center py-6 mt-10 bg-white bg-opacity-70 rounded-t-xl shadow-lg">
-            <p class="text-gray-600">&copy; 2025 Cloud Works. All rights reserved.</p>
-        </footer>
+        <!-- DOWNLOADS SCREEN -->
+        <section id="screen-downloads" class="hidden">
+            <div class="max-w-2xl mx-auto bg-white bg-opacity-90 rounded-xl shadow-lg p-8 mt-8">
+                <h2 class="text-3xl font-extrabold mb-4 text-blue-600">Downloads</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div class="bg-blue-50 rounded-lg shadow p-4 flex flex-col items-center">
+                        <span class="text-2xl font-bold text-blue-700 mb-2">Windows 10</span>
+                        <a href="https://www.microsoft.com/en-us/software-download/windows10" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mt-2">Download</a>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg shadow p-4 flex flex-col items-center">
+                        <span class="text-2xl font-bold text-blue-700 mb-2">Windows 11</span>
+                        <a href="https://www.microsoft.com/en-us/software-download/windows11" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mt-2">Download</a>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg shadow p-4 flex flex-col items-center">
+                        <span class="text-2xl font-bold text-blue-700 mb-2">Server 2022</span>
+                        <a href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mt-2">Download</a>
+                    </div>
+                </div>
+                <p class="mt-8 text-gray-500 text-sm">Download links go to official Microsoft pages for safety.</p>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Contact Modal -->
-    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-500 opacity-0 pointer-events-none">
-        <div id="modalCard" class="modal-enter w-full max-w-xl p-8 bg-white rounded-2xl shadow-2xl relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
-            <h2 class="text-3xl font-bold mb-6 text-blue-600">Contact IT Support</h2>
-            <form onsubmit="sendEmail(event)" class="space-y-4">
-                <div>
-                    <label for="name" class="block text-left font-semibold">Name:</label>
-                    <input type="text" id="name" name="name" required class="w-full border border-gray-300 p-2 rounded"/>
-                </div>
-                <div>
-                    <label for="email" class="block text-left font-semibold">Email:</label>
-                    <input type="email" id="email" name="email" required class="w-full border border-gray-300 p-2 rounded"/>
-                </div>
-                <div>
-                    <label for="message" class="block text-left font-semibold">Message:</label>
-                    <textarea id="message" name="message" rows="5" required class="w-full border border-gray-300 p-2 rounded"></textarea>
-                </div>
-                <button type="submit" class="bg-blue-500 text-white font-bold px-6 py-2 rounded hover:bg-blue-600 transition">Send Email</button>
-            </form>
-        </div>
-    </div>
+    <!-- Footer -->
+    <footer class="text-center py-6 mt-10 bg-white bg-opacity-80 rounded-t-xl shadow-lg">
+        <p class="text-gray-600">&copy; 2025 Cloud Works. All rights reserved.</p>
+    </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts: Navigation (no backend) -->
     <script>
-        // Modal logic
-        const modal = document.getElementById('contactModal');
-        const modalCard = document.getElementById('modalCard');
-
-        function openModal() {
-            modal.style.opacity = '1';
-            modal.style.pointerEvents = 'auto';
-            modalCard.classList.add('modal-enter-active');
-            modalCard.classList.remove('modal-exit-active');
+        // Navigation logic
+        const screens = ['status', 'portal', 'downloads'];
+        function showScreen(name) {
+            screens.forEach(s => {
+                document.getElementById('screen-' + s).style.display = (s === name) ? 'block' : 'none';
+                document.getElementById('tab-' + s).classList.toggle('nav-active', s === name);
+            });
         }
-
-        function closeModal() {
-            modal.style.opacity = '0';
-            modal.style.pointerEvents = 'none';
-            modalCard.classList.remove('modal-enter-active');
-            modalCard.classList.add('modal-exit-active');
-        }
-
-        // Modal close on background click
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) closeModal();
-        });
-
-        // Email sending logic
-        function sendEmail(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-
-            if (!name || !email || !message) {
-                alert("Please fill in all fields.");
-                return;
-            }
-
-            const subject = encodeURIComponent(`Support Request from ${name}`);
-            const body = `Name: ${encodeURIComponent(name)}\nEmail: ${encodeURIComponent(email)}\nMessage: ${encodeURIComponent(message)}`;
-            const mailtoLink = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body.replace(/\n/g, '%0A')}`;
-
-            window.location.href = mailtoLink;
-            closeModal();
-        }
+        // Show status screen by default
+        showScreen('status');
     </script>
 </body>
 </html>
