@@ -31,7 +31,6 @@
     <header class="fixed w-full top-0 left-0 z-20 bg-white bg-opacity-90 shadow-md">
         <nav class="container mx-auto flex justify-between items-center py-3 px-4">
             <div class="flex items-center gap-2">
-                <!-- Logo SVG -->
                 <span class="inline-block w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-blue-700 flex items-center justify-center shadow">
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z"/></svg>
                 </span>
@@ -74,108 +73,28 @@
             </section>
         </section>
 
-        <!-- STATUS SCREEN (for viewing only) -->
+        <!-- STATUS SCREEN -->
         <section id="screen-status" class="hidden">
             <div class="max-w-2xl mx-auto bg-white bg-opacity-90 rounded-xl shadow-lg p-8 mt-8">
                 <h2 class="text-3xl font-extrabold mb-4 text-blue-600">Service Status</h2>
                 <div class="space-y-4">
                     <div class="flex items-center gap-4">
                         <span class="text-xl font-bold">Plex</span>
-                        <span id="plex-status" class="px-3 py-1 rounded font-semibold">Online</span>
+                        <span id="plex-status" class="px-3 py-1 rounded font-semibold">Loading...</span>
                     </div>
                     <div class="flex items-center gap-4">
                         <span class="text-xl font-bold">Jellyfin</span>
-                        <span id="jellyfin-status" class="px-3 py-1 rounded font-semibold">Offline</span>
+                        <span id="jellyfin-status" class="px-3 py-1 rounded font-semibold">Loading...</span>
                     </div>
                     <div class="flex items-center gap-4">
                         <span class="text-xl font-bold">DNS (192.168.1.77)</span>
-                        <span id="dns-status" class="px-3 py-1 rounded font-semibold">Online</span>
+                        <span id="dns-status" class="px-3 py-1 rounded font-semibold">Loading...</span>
                     </div>
                 </div>
-                <p class="mt-6 text-gray-500 text-sm">Status is simulated for demo purposes. Real checks require a backend server.</p>
+                <p class="mt-6 text-gray-500 text-sm">Statuses are fetched live from the backend server.</p>
                 <div class="mt-6">
                     <span id="maintenance-indicator" class="px-3 py-1 rounded font-bold text-orange-700 bg-orange-200" style="display:none;">Maintenance Mode Active</span>
                 </div>
-            </div>
-        </section>
-
-        <!-- ADMIN STATUS SCREEN (direct links to services, all features) -->
-        <section id="screen-admin" class="hidden">
-            <div class="max-w-2xl mx-auto bg-white bg-opacity-95 rounded-xl shadow-lg p-8 mt-8">
-                <h2 class="text-3xl font-extrabold mb-4 text-green-600">Admin Status Panel</h2>
-                <div class="space-y-6 mb-8">
-                    <!-- Quick Links -->
-                    <h3 class="text-xl font-bold mb-2 text-blue-700">Quick Links</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <a href="file://192.168.1.77/files" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
-                            <span class="font-bold text-blue-700">File Server / NAS</span>
-                            <span class="text-gray-500 text-sm">\\192.168.1.77\files</span>
-                        </a>
-                        <a href="http://192.168.1.77:631" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
-                            <span class="font-bold text-blue-700">Printer Management</span>
-                            <span class="text-gray-500 text-sm">Web Interface</span>
-                        </a>
-                        <a href="http://192.168.1.1" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
-                            <span class="font-bold text-blue-700">Router / Firewall</span>
-                            <span class="text-gray-500 text-sm">192.168.1.1</span>
-                        </a>
-                        <a href="https://www.speedtest.net/" target="_blank" class="bg-blue-50 rounded-lg p-4 flex items-center gap-3 hover:bg-blue-100 transition">
-                            <span class="font-bold text-blue-700">Network Speed Test</span>
-                        </a>
-                        <!-- REMOVED SYSTEM RESOURCE MONITOR AND GRAFANA LINK -->
-                    </div>
-                </div>
-                <div class="space-y-6">
-                    <h3 class="text-xl font-bold mb-2 text-blue-700">Service Controls</h3>
-                    <div>
-                        <label class="text-xl font-bold mr-4">Plex</label>
-                        <select id="admin-plex" class="rounded px-3 py-1 border border-gray-300">
-                            <option value="Online">Online</option>
-                            <option value="Offline">Offline</option>
-                            <option value="Maintenance">Maintenance</option>
-                        </select>
-                        <a href="http://192.168.1.77:32400/web" target="_blank" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Plex</a>
-                        <button onclick="simRestart('Plex')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Restart</button>
-                        <button onclick="simShutdown('Plex')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Shutdown</button>
-                    </div>
-                    <div>
-                        <label class="text-xl font-bold mr-4">Jellyfin</label>
-                        <select id="admin-jellyfin" class="rounded px-3 py-1 border border-gray-300">
-                            <option value="Online">Online</option>
-                            <option value="Offline">Offline</option>
-                            <option value="Maintenance">Maintenance</option>
-                        </select>
-                        <a href="http://192.168.1.77:8096/web/index.html" target="_blank" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Jellyfin</a>
-                        <button onclick="simRestart('Jellyfin')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Restart</button>
-                        <button onclick="simShutdown('Jellyfin')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Shutdown</button>
-                    </div>
-                    <div>
-                        <label class="text-xl font-bold mr-4">DNS (192.168.1.77)</label>
-                        <select id="admin-dns" class="rounded px-3 py-1 border border-gray-300">
-                            <option value="Online">Online</option>
-                            <option value="Offline">Offline</option>
-                            <option value="Maintenance">Maintenance</option>
-                        </select>
-                        <a href="rdp://192.168.1.77" class="ml-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Login to Remote Desktop</a>
-                        <button onclick="simRestart('DNS')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Restart</button>
-                        <button onclick="simShutdown('DNS')" class="ml-2 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">Shutdown</button>
-                    </div>
-                </div>
-                <div class="space-y-6 mt-8">
-                    <h3 class="text-xl font-bold mb-2 text-blue-700">Network Tools</h3>
-                    <button onclick="simWakeOnLAN()" class="bg-blue-500 text-white px-6 py-2 rounded font-bold hover:bg-blue-600 transition">Wake-on-LAN</button>
-                    <div class="mt-4">
-                        <input type="text" id="broadcast-input" placeholder="Broadcast message..." class="px-3 py-1 rounded border border-gray-300 w-2/3">
-                        <button onclick="simBroadcast()" class="bg-yellow-500 text-white px-4 py-1 rounded font-bold hover:bg-yellow-600 transition ml-2">Send Broadcast</button>
-                    </div>
-                    <div class="mt-4">
-                        <input type="text" id="announcement-input" placeholder="Update announcement bar..." class="px-3 py-1 rounded border border-gray-300 w-2/3">
-                        <button onclick="simAnnounce()" class="bg-yellow-700 text-white px-4 py-1 rounded font-bold hover:bg-yellow-800 transition ml-2">Update Announcement</button>
-                        <button onclick="simClearAnnounce()" class="bg-gray-400 text-white px-4 py-1 rounded font-bold hover:bg-gray-500 ml-2">Clear</button>
-                    </div>
-                </div>
-                <button onclick="saveAdminStatus()" class="mt-8 bg-green-500 text-white px-6 py-2 rounded font-bold hover:bg-green-600 transition">Save Status</button>
-                <button onclick="logoutAdmin()" class="mt-8 ml-4 bg-gray-300 text-gray-700 px-6 py-2 rounded font-bold hover:bg-gray-400 transition">Logout</button>
             </div>
         </section>
 
@@ -202,56 +121,23 @@
         </section>
     </main>
 
-    <!-- Contact Modal -->
-    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-500 opacity-0 pointer-events-none">
-        <div id="modalCard" class="modal-enter w-full max-w-xl p-8 bg-white rounded-2xl shadow-2xl relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
-            <h2 class="text-3xl font-bold mb-6 text-blue-600">Contact IT Support</h2>
-            <form onsubmit="sendEmail(event)" class="space-y-4">
-                <div>
-                    <label for="name" class="block text-left font-semibold">Name:</label>
-                    <input type="text" id="name" name="name" required class="w-full border border-gray-300 p-2 rounded"/>
-                </div>
-                <div>
-                    <label for="email" class="block text-left font-semibold">Email:</label>
-                    <input type="email" id="email" name="email" required class="w-full border border-gray-300 p-2 rounded"/>
-                </div>
-                <div>
-                    <label for="message" class="block text-left font-semibold">Message:</label>
-                    <textarea id="message" name="message" rows="5" required class="w-full border border-gray-300 p-2 rounded"></textarea>
-                </div>
-                <button type="submit" class="bg-blue-500 text-white font-bold px-6 py-2 rounded hover:bg-blue-600 transition">Send Email</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-500 opacity-0 pointer-events-none">
-        <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
-            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
-            <h2 class="text-3xl font-bold mb-6 text-green-600">Admin Login</h2>
-            <form onsubmit="fakeLogin(event)" class="space-y-4">
-                <div>
-                    <label for="login-username" class="block text-left font-semibold">Username:</label>
-                    <input type="text" id="login-username" name="login-username" required class="w-full border border-gray-300 p-2 rounded"/>
-                </div>
-                <div>
-                    <label for="login-password" class="block text-left font-semibold">Password:</label>
-                    <input type="password" id="login-password" name="login-password" required class="w-full border border-gray-300 p-2 rounded"/>
-                </div>
-                <button type="submit" class="bg-green-500 text-white font-bold px-6 py-2 rounded hover:bg-green-600 transition">Login</button>
-            </form>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer class="text-center py-6 bg-white bg-opacity-80 rounded-t-xl shadow-lg w-full">
         <p class="text-gray-600">&copy; 2025 Cloud Works. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts: Navigation, Modal, and Login/Admin Status -->
+    <!-- Scripts -->
     <script>
-        // Announcements bar logic
+        const screens = ['main', 'status', 'downloads', 'admin'];
+        function showScreen(name) {
+            screens.forEach(s => {
+                document.getElementById('screen-' + s)?.classList.toggle('hidden', s !== name);
+                const tab = document.getElementById('tab-' + s);
+                if (tab) tab.classList.toggle('nav-active', s === name);
+            });
+        }
+        showScreen('main');
+
         let announcementText = "";
         function updateAnnouncementBar() {
             const bar = document.getElementById('announcement-bar');
@@ -264,167 +150,69 @@
                 msg.textContent = "";
             }
         }
-
-        // Navigation logic
-        const screens = ['main', 'status', 'downloads', 'admin'];
-        function showScreen(name) {
-            screens.forEach(s => {
-                document.getElementById('screen-' + s).style.display = (s === name) ? 'block' : 'none';
-                const tab = document.getElementById('tab-' + s);
-                if (tab) tab.classList.toggle('nav-active', s === name);
-            });
-        }
-        showScreen('main');
         updateAnnouncementBar();
 
-        // Contact Modal logic
-        const modal = document.getElementById('contactModal');
-        const modalCard = document.getElementById('modalCard');
+        // Contact modal
+        function openModal() { const m = document.getElementById('contactModal'); m.style.opacity='1'; m.style.pointerEvents='auto'; }
+        function closeModal() { const m = document.getElementById('contactModal'); m.style.opacity='0'; m.style.pointerEvents='none'; }
 
-        function openModal() {
-            modal.style.opacity = '1';
-            modal.style.pointerEvents = 'auto';
-            modalCard.classList.add('modal-enter-active');
-            modalCard.classList.remove('modal-exit-active');
-        }
-        function closeModal() {
-            modal.style.opacity = '0';
-            modal.style.pointerEvents = 'none';
-            modalCard.classList.remove('modal-enter-active');
-            modalCard.classList.add('modal-exit-active');
-        }
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) closeModal();
-        });
-        function sendEmail(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-            if (!name || !email || !message) {
-                alert("Please fill in all fields.");
-                return;
-            }
-            const subject = encodeURIComponent(`Support Request from ${name}`);
-            const body = `Name: ${encodeURIComponent(name)}\nEmail: ${encodeURIComponent(email)}\nMessage: ${encodeURIComponent(message)}`;
-            const mailtoLink = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body.replace(/\n/g, '%0A')}`;
-            window.location.href = mailtoLink;
-            closeModal();
-        }
-
-        // Admin login logic
+        // Admin login (simulated)
         let isAdmin = false;
         const loginBtn = document.getElementById('login-btn');
-        function openLoginModal() {
-            document.getElementById('loginModal').style.opacity = '1';
-            document.getElementById('loginModal').style.pointerEvents = 'auto';
-        }
-        function closeLoginModal() {
-            document.getElementById('loginModal').style.opacity = '0';
-            document.getElementById('loginModal').style.pointerEvents = 'none';
-        }
-        document.getElementById('loginModal').addEventListener('click', function(e) {
-            if (e.target === this) closeLoginModal();
-        });
-
-        // UPDATED LOGIN: username liamr, password Cloud@2025!
-        function fakeLogin(event) {
-            event.preventDefault();
+        function openLoginModal() { const m = document.getElementById('loginModal'); m.style.opacity='1'; m.style.pointerEvents='auto'; }
+        function closeLoginModal() { const m = document.getElementById('loginModal'); m.style.opacity='0'; m.style.pointerEvents='none'; }
+        function fakeLogin(e) {
+            e.preventDefault();
             const username = document.getElementById('login-username').value.trim();
             const password = document.getElementById('login-password').value.trim();
-            if (username === "liamr" && password === "Cloud@2025!") {
-                isAdmin = true;
+            if(username==='liamr' && password==='Cloud@2025!') {
+                isAdmin=true;
                 closeLoginModal();
-                loginBtn.textContent = "Logout";
-                loginBtn.onclick = logoutAdmin;
+                loginBtn.textContent="Logout";
+                loginBtn.onclick=logoutAdmin;
                 showScreen('admin');
-                document.getElementById('admin-plex').value = statusStore.plex;
-                document.getElementById('admin-jellyfin').value = statusStore.jellyfin;
-                document.getElementById('admin-dns').value = statusStore.dns;
-                updateMaintenanceIndicator();
-            } else {
-                alert("Invalid login.");
+            } else { alert("Invalid login."); }
+        }
+        function logoutAdmin() { isAdmin=false; loginBtn.textContent="Login"; loginBtn.onclick=openLoginModal; showScreen('main'); }
+
+        // ===== LIVE SERVICE STATUS FETCH =====
+        async function loadServiceStatus() {
+            try {
+                const res = await fetch("https://cloudworks.org.uk/api/status");
+                const data = await res.json();
+
+                data.services.forEach(svc => {
+                    let elId = '';
+                    if (svc.name.toLowerCase() === 'plex') elId='plex-status';
+                    if (svc.name.toLowerCase().includes('dns')) elId='dns-status';
+                    if (svc.name.toLowerCase().includes('jellyfin')) elId='jellyfin-status';
+                    if(!elId) return;
+
+                    const el = document.getElementById(elId);
+                    el.textContent = svc.status;
+                    if(svc.status==='up'||svc.status==='online') {
+                        el.className="px-3 py-1 rounded font-semibold bg-green-200 text-green-800";
+                    } else if(svc.status==='down'||svc.status==='offline') {
+                        el.className="px-3 py-1 rounded font-semibold bg-red-200 text-red-800";
+                    } else if(svc.status.toLowerCase()==='maintenance') {
+                        el.className="px-3 py-1 rounded font-semibold bg-orange-200 text-orange-800";
+                    }
+                });
+
+                const m = document.getElementById('maintenance-indicator');
+                if(data.services.some(s=>s.status.toLowerCase()==='maintenance')) m.style.display="inline-block";
+                else m.style.display="none";
+
+            } catch(err) {
+                console.error("Failed to load service status:", err);
+                ['plex-status','dns-status','jellyfin-status'].forEach(id=>{
+                    const el=document.getElementById(id);
+                    if(el){el.textContent="Offline"; el.className="px-3 py-1 rounded font-semibold bg-red-200 text-red-800";}
+                });
             }
         }
-        function logoutAdmin() {
-            isAdmin = false;
-            loginBtn.textContent = "Login";
-            loginBtn.onclick = openLoginModal;
-            showScreen('main');
-        }
-
-        // Status simulation and admin control
-        const statusStore = {
-            plex: "Online",
-            jellyfin: "Offline",
-            dns: "Online"
-        };
-        function updateStatusDisplay() {
-            displayStatus('plex-status', statusStore.plex);
-            displayStatus('jellyfin-status', statusStore.jellyfin);
-            displayStatus('dns-status', statusStore.dns);
-            updateMaintenanceIndicator();
-        }
-        function displayStatus(id, status) {
-            const el = document.getElementById(id);
-            el.textContent = status;
-            if (status === "Online") {
-                el.className = "px-3 py-1 rounded font-semibold bg-green-200 text-green-800";
-            } else if (status === "Offline") {
-                el.className = "px-3 py-1 rounded font-semibold bg-red-200 text-red-800";
-            } else if (status === "Maintenance") {
-                el.className = "px-3 py-1 rounded font-semibold bg-orange-200 text-orange-800";
-            }
-        }
-        function updateMaintenanceIndicator() {
-            const m = document.getElementById('maintenance-indicator');
-            if (statusStore.plex === "Maintenance" || statusStore.jellyfin === "Maintenance" || statusStore.dns === "Maintenance") {
-                m.style.display = "inline-block";
-            } else {
-                m.style.display = "none";
-            }
-        }
-        updateStatusDisplay();
-
-        function saveAdminStatus() {
-            statusStore.plex = document.getElementById('admin-plex').value;
-            statusStore.jellyfin = document.getElementById('admin-jellyfin').value;
-            statusStore.dns = document.getElementById('admin-dns').value;
-            updateStatusDisplay();
-            alert("Status updated!");
-            showScreen('status');
-        }
-
-        // Simulated Wake-on-LAN
-        function simWakeOnLAN() {
-            alert("Wake-on-LAN packet sent to all sleeping devices (simulated)");
-        }
-        // Simulated Restart/Shutdown
-        function simRestart(service) {
-            alert(`${service} is restarting (simulated)`);
-        }
-        function simShutdown(service) {
-            alert(`${service} is shutting down (simulated)`);
-        }
-        // Simulated Broadcast
-        function simBroadcast() {
-            const msg = document.getElementById('broadcast-input').value.trim();
-            if (!msg) { alert("Enter a broadcast message."); return; }
-            alert(`Broadcast to all users: ${msg} (simulated)`);
-            document.getElementById('broadcast-input').value = "";
-        }
-        // Announcements bar controls
-        function simAnnounce() {
-            const msg = document.getElementById('announcement-input').value.trim();
-            if (!msg) { alert("Enter an announcement."); return; }
-            announcementText = msg;
-            updateAnnouncementBar();
-            document.getElementById('announcement-input').value = "";
-        }
-        function simClearAnnounce() {
-            announcementText = "";
-            updateAnnouncementBar();
-        }
+        loadServiceStatus();
+        setInterval(loadServiceStatus,30000);
     </script>
 </body>
 </html>
