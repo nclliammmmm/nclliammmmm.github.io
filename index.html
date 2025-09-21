@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <title>Cloud Works Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon (Logo SVG) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%233490dc'/%3E%3Cpath d='M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z' fill='white'/%3E%3C/svg%3E">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -21,7 +18,6 @@
     </style>
 </head>
 <body>
-
     <!-- Announcements Bar -->
     <div id="announcement-bar" class="w-full text-center py-2 bg-yellow-200 text-yellow-800 font-semibold shadow" style="display:none;">
         <span id="announcement-message"></span>
@@ -77,24 +73,10 @@
         <section id="screen-status" class="hidden">
             <div class="max-w-2xl mx-auto bg-white bg-opacity-90 rounded-xl shadow-lg p-8 mt-8">
                 <h2 class="text-3xl font-extrabold mb-4 text-blue-600">Service Status</h2>
-                <div class="space-y-4">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xl font-bold">Plex</span>
-                        <span id="plex-status" class="px-3 py-1 rounded font-semibold">Loading...</span>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="text-xl font-bold">Jellyfin</span>
-                        <span id="jellyfin-status" class="px-3 py-1 rounded font-semibold">Loading...</span>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="text-xl font-bold">DNS (192.168.1.77)</span>
-                        <span id="dns-status" class="px-3 py-1 rounded font-semibold">Loading...</span>
-                    </div>
+                <div id="status-list" class="space-y-4">
+                    <!-- Dynamically populated -->
                 </div>
-                <p class="mt-6 text-gray-500 text-sm">Statuses are fetched live from the backend server.</p>
-                <div class="mt-6">
-                    <span id="maintenance-indicator" class="px-3 py-1 rounded font-bold text-orange-700 bg-orange-200" style="display:none;">Maintenance Mode Active</span>
-                </div>
+                <p class="mt-6 text-gray-500 text-sm">Status is fetched live from the backend.</p>
             </div>
         </section>
 
@@ -116,103 +98,126 @@
                         <a href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mt-2">Download</a>
                     </div>
                 </div>
-                <p class="mt-8 text-gray-500 text-sm">Download links go to official Microsoft pages for safety.</p>
+                <p class="mt-8 text-gray-500 text-sm">Official Microsoft links.</p>
+            </div>
+        </section>
+
+        <!-- ADMIN SCREEN -->
+        <section id="screen-admin" class="hidden">
+            <div class="max-w-2xl mx-auto bg-white bg-opacity-95 rounded-xl shadow-lg p-8 mt-8">
+                <h2 class="text-3xl font-extrabold mb-4 text-green-600">Admin Panel</h2>
+                <div id="admin-status-list" class="space-y-4">
+                    <!-- Populated dynamically -->
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-500 opacity-0 pointer-events-none">
+        <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
+            <h2 class="text-3xl font-bold mb-6 text-green-600">Admin Login</h2>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="login-username" class="block text-left font-semibold">Username:</label>
+                    <input type="text" id="login-username" name="login-username" required class="w-full border border-gray-300 p-2 rounded"/>
+                </div>
+                <div>
+                    <label for="login-password" class="block text-left font-semibold">Password:</label>
+                    <input type="password" id="login-password" name="login-password" required class="w-full border border-gray-300 p-2 rounded"/>
+                </div>
+                <button type="submit" class="bg-green-500 text-white font-bold px-6 py-2 rounded hover:bg-green-600 transition">Login</button>
+            </form>
+        </div>
+    </div>
+
     <footer class="text-center py-6 bg-white bg-opacity-80 rounded-t-xl shadow-lg w-full">
         <p class="text-gray-600">&copy; 2025 Cloud Works. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        const screens = ['main', 'status', 'downloads', 'admin'];
-        function showScreen(name) {
+        // Navigation logic
+        const screens = ['main','status','downloads','admin'];
+        function showScreen(name){
             screens.forEach(s => {
-                document.getElementById('screen-' + s)?.classList.toggle('hidden', s !== name);
-                const tab = document.getElementById('tab-' + s);
-                if (tab) tab.classList.toggle('nav-active', s === name);
+                document.getElementById('screen-'+s).style.display = (s===name)?'block':'none';
+                const tab=document.getElementById('tab-'+s);
+                if(tab) tab.classList.toggle('nav-active', s===name);
             });
         }
         showScreen('main');
 
-        let announcementText = "";
-        function updateAnnouncementBar() {
-            const bar = document.getElementById('announcement-bar');
-            const msg = document.getElementById('announcement-message');
-            if (announcementText) {
-                bar.style.display = "block";
-                msg.textContent = announcementText;
-            } else {
-                bar.style.display = "none";
-                msg.textContent = "";
-            }
+        // Login modal
+        const loginModal=document.getElementById('loginModal');
+        function openLoginModal(){
+            loginModal.style.opacity='1';
+            loginModal.style.pointerEvents='auto';
         }
-        updateAnnouncementBar();
+        function closeLoginModal(){
+            loginModal.style.opacity='0';
+            loginModal.style.pointerEvents='none';
+        }
 
-        // Contact modal
-        function openModal() { const m = document.getElementById('contactModal'); m.style.opacity='1'; m.style.pointerEvents='auto'; }
-        function closeModal() { const m = document.getElementById('contactModal'); m.style.opacity='0'; m.style.pointerEvents='none'; }
-
-        // Admin login (simulated)
-        let isAdmin = false;
-        const loginBtn = document.getElementById('login-btn');
-        function openLoginModal() { const m = document.getElementById('loginModal'); m.style.opacity='1'; m.style.pointerEvents='auto'; }
-        function closeLoginModal() { const m = document.getElementById('loginModal'); m.style.opacity='0'; m.style.pointerEvents='none'; }
-        function fakeLogin(e) {
+        // Handle login
+        document.getElementById('loginForm').addEventListener('submit', async (e)=>{
             e.preventDefault();
-            const username = document.getElementById('login-username').value.trim();
-            const password = document.getElementById('login-password').value.trim();
-            if(username==='liamr' && password==='Cloud@2025!') {
-                isAdmin=true;
-                closeLoginModal();
-                loginBtn.textContent="Logout";
-                loginBtn.onclick=logoutAdmin;
-                showScreen('admin');
-            } else { alert("Invalid login."); }
-        }
-        function logoutAdmin() { isAdmin=false; loginBtn.textContent="Login"; loginBtn.onclick=openLoginModal; showScreen('main'); }
-
-        // ===== LIVE SERVICE STATUS FETCH =====
-        async function loadServiceStatus() {
-            try {
-                const res = await fetch("https://cloudworks.org.uk/api/status");
-                const data = await res.json();
-
-                data.services.forEach(svc => {
-                    let elId = '';
-                    if (svc.name.toLowerCase() === 'plex') elId='plex-status';
-                    if (svc.name.toLowerCase().includes('dns')) elId='dns-status';
-                    if (svc.name.toLowerCase().includes('jellyfin')) elId='jellyfin-status';
-                    if(!elId) return;
-
-                    const el = document.getElementById(elId);
-                    el.textContent = svc.status;
-                    if(svc.status==='up'||svc.status==='online') {
-                        el.className="px-3 py-1 rounded font-semibold bg-green-200 text-green-800";
-                    } else if(svc.status==='down'||svc.status==='offline') {
-                        el.className="px-3 py-1 rounded font-semibold bg-red-200 text-red-800";
-                    } else if(svc.status.toLowerCase()==='maintenance') {
-                        el.className="px-3 py-1 rounded font-semibold bg-orange-200 text-orange-800";
-                    }
+            const username=document.getElementById('login-username').value;
+            const password=document.getElementById('login-password').value;
+            try{
+                const res=await fetch('/api/login',{
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({username,password})
                 });
+                if(res.ok){
+                    closeLoginModal();
+                    showScreen('admin');
+                    fetchStatus();
+                } else {
+                    alert('Login failed');
+                }
+            }catch(err){
+                console.error(err);
+                alert('Error connecting to backend');
+            }
+        });
 
-                const m = document.getElementById('maintenance-indicator');
-                if(data.services.some(s=>s.status.toLowerCase()==='maintenance')) m.style.display="inline-block";
-                else m.style.display="none";
+        // Fetch service status
+        async function fetchStatus(){
+            try{
+                const res=await fetch('/api/status');
+                const data=await res.json();
+                const statusList=document.getElementById('status-list');
+                const adminList=document.getElementById('admin-status-list');
+                statusList.innerHTML='';
+                adminList.innerHTML='';
+                data.services.forEach(s=>{
+                    const div=document.createElement('div');
+                    div.className="flex items-center gap-4";
+                    div.innerHTML=`<span class="text-xl font-bold">${s.name}</span>
+                    <span class="px-3 py-1 rounded font-semibold ${s.status==='up'?'bg-green-200 text-green-800':'bg-red-200 text-red-800'}">${s.status.toUpperCase()}</span>`;
+                    statusList.appendChild(div);
 
-            } catch(err) {
-                console.error("Failed to load service status:", err);
-                ['plex-status','dns-status','jellyfin-status'].forEach(id=>{
-                    const el=document.getElementById(id);
-                    if(el){el.textContent="Offline"; el.className="px-3 py-1 rounded font-semibold bg-red-200 text-red-800";}
+                    // admin controls
+                    const adminDiv=document.createElement('div');
+                    adminDiv.className="flex items-center gap-4";
+                    adminDiv.innerHTML=`<span class="text-xl font-bold">${s.name}</span>
+                    <select class="px-3 py-1 rounded border border-gray-300" onchange="alert('Simulated: '+this.value)">
+                        <option ${s.status==='up'?'selected':''}>Online</option>
+                        <option ${s.status==='down'?'selected':''}>Offline</option>
+                        <option>Maintenance</option>
+                    </select>`;
+                    adminList.appendChild(adminDiv);
                 });
+            }catch(err){
+                console.error(err);
             }
         }
-        loadServiceStatus();
-        setInterval(loadServiceStatus,30000);
+
+        // Auto-fetch every 10s
+        setInterval(fetchStatus,10000);
+        fetchStatus();
     </script>
 </body>
 </html>
