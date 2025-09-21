@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <title>Cloud Works Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon (Logo SVG) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%233490dc'/%3E%3Cpath d='M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z' fill='white'/%3E%3C/svg%3E">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html, body { height: 100%; }
@@ -21,17 +17,15 @@
     </style>
 </head>
 <body>
-
     <!-- Announcements Bar -->
     <div id="announcement-bar" class="w-full text-center py-2 bg-yellow-200 text-yellow-800 font-semibold shadow" style="display:none;">
         <span id="announcement-message"></span>
     </div>
 
-    <!-- Navigation Tabs -->
+    <!-- Navigation -->
     <header class="fixed w-full top-0 left-0 z-20 bg-white bg-opacity-90 shadow-md">
         <nav class="container mx-auto flex justify-between items-center py-3 px-4">
             <div class="flex items-center gap-2">
-                <!-- Logo SVG -->
                 <span class="inline-block w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-blue-700 flex items-center justify-center shadow">
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z"/></svg>
                 </span>
@@ -41,35 +35,25 @@
                 <li><button onclick="showScreen('main')" id="tab-main" class="px-3 py-2 rounded transition">Home</button></li>
                 <li><button onclick="showScreen('status')" id="tab-status" class="px-3 py-2 rounded transition">Status</button></li>
                 <li><button onclick="showScreen('downloads')" id="tab-downloads" class="px-3 py-2 rounded transition">Downloads</button></li>
-                <li>
-                    <button id="login-btn" class="px-4 py-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition shadow font-semibold">
-                        Login
-                    </button>
-                </li>
-                <li>
-                    <button id="supportBtn" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition shadow font-semibold">
-                        Get Support
-                    </button>
-                </li>
+                <li><button onclick="openLoginModal()" class="px-4 py-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition shadow font-semibold" id="login-btn">Login</button></li>
+                <li><button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition shadow font-semibold">Contact IT</button></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main -->
     <main class="pt-36 container mx-auto w-full">
 
-        <!-- MAIN PAGE SCREEN -->
+        <!-- HOME SCREEN -->
         <section id="screen-main">
             <section id="about" class="relative flex flex-col items-center justify-center py-24 mb-12 rounded-xl shadow-xl overflow-hidden bg-white bg-opacity-80">
                 <div class="absolute inset-0 pointer-events-none z-0" style="background: radial-gradient(circle at 70% 30%, #a8edea 0%, #fed6e3 100%); opacity:0.4;"></div>
                 <div class="relative z-10 max-w-2xl mx-auto text-center">
                     <h2 class="text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-400">Welcome to Cloud Works</h2>
                     <p class="text-xl text-gray-700 mb-8">
-                        We offer creative IT help for registered users. Need support? Use the tabs above to check status, download software, or contact IT!
+                        We offer creative IT help for registered users. Use the tabs above to check status, download software, or contact IT!
                     </p>
-                    <button onclick="openSupport()" class="bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition transform">
-                        Get Support
-                    </button>
+                    <button onclick="openModal()" class="bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition transform">Get Support</button>
                 </div>
             </section>
         </section>
@@ -81,18 +65,21 @@
                 <div class="space-y-4">
                     <div class="flex items-center gap-4">
                         <span class="text-xl font-bold">Plex</span>
-                        <span id="plex-status" class="px-3 py-1 rounded font-semibold">Unknown</span>
+                        <span id="plex-status" class="px-3 py-1 rounded font-semibold">Loading...</span>
                     </div>
                     <div class="flex items-center gap-4">
                         <span class="text-xl font-bold">Jellyfin</span>
-                        <span id="jellyfin-status" class="px-3 py-1 rounded font-semibold">Unknown</span>
+                        <span id="jellyfin-status" class="px-3 py-1 rounded font-semibold">Loading...</span>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="text-xl font-bold">DNS (192.168.1.77)</span>
-                        <span id="dns-status" class="px-3 py-1 rounded font-semibold">Unknown</span>
+                        <span class="text-xl font-bold">DNS</span>
+                        <span id="dns-status" class="px-3 py-1 rounded font-semibold">Loading...</span>
                     </div>
                 </div>
-                <p class="mt-6 text-gray-500 text-sm">Status updates automatically every 10 seconds.</p>
+                <p class="mt-6 text-gray-500 text-sm">Status is fetched from the backend.</p>
+                <div class="mt-6">
+                    <span id="maintenance-indicator" class="px-3 py-1 rounded font-bold text-orange-700 bg-orange-200" style="display:none;">Maintenance Mode Active</span>
+                </div>
             </div>
         </section>
 
@@ -114,18 +101,39 @@
                         <a href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mt-2">Download</a>
                     </div>
                 </div>
-                <p class="mt-8 text-gray-500 text-sm">Download links go to official Microsoft pages for safety.</p>
             </div>
         </section>
-
     </main>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-500 opacity-0 pointer-events-none">
+        <div id="modalCard" class="modal-enter w-full max-w-xl p-8 bg-white rounded-2xl shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
+            <h2 class="text-3xl font-bold mb-6 text-blue-600">Contact IT Support</h2>
+            <form onsubmit="sendEmail(event)" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-left font-semibold">Name:</label>
+                    <input type="text" id="name" name="name" required class="w-full border border-gray-300 p-2 rounded"/>
+                </div>
+                <div>
+                    <label for="email" class="block text-left font-semibold">Email:</label>
+                    <input type="email" id="email" name="email" required class="w-full border border-gray-300 p-2 rounded"/>
+                </div>
+                <div>
+                    <label for="message" class="block text-left font-semibold">Message:</label>
+                    <textarea id="message" name="message" rows="5" required class="w-full border border-gray-300 p-2 rounded"></textarea>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white font-bold px-6 py-2 rounded hover:bg-blue-600 transition">Send Email</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Login Modal -->
     <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-500 opacity-0 pointer-events-none">
         <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
             <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500 transition">&times;</button>
             <h2 class="text-3xl font-bold mb-6 text-green-600">Admin Login</h2>
-            <form>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label for="login-username" class="block text-left font-semibold">Username:</label>
                     <input type="text" id="login-username" name="login-username" required class="w-full border border-gray-300 p-2 rounded"/>
@@ -134,7 +142,7 @@
                     <label for="login-password" class="block text-left font-semibold">Password:</label>
                     <input type="password" id="login-password" name="login-password" required class="w-full border border-gray-300 p-2 rounded"/>
                 </div>
-                <button type="submit" class="bg-green-500 text-white font-bold px-6 py-2 rounded hover:bg-green-600 transition mt-4 w-full">Login</button>
+                <button type="submit" class="bg-green-500 text-white font-bold px-6 py-2 rounded hover:bg-green-600 transition">Login</button>
             </form>
         </div>
     </div>
@@ -146,75 +154,100 @@
 
     <!-- Scripts -->
     <script>
-        const screens = ['main', 'status', 'downloads', 'admin'];
+        const backendUrl = 'https://pharmacy-replaced-delivering-durham.trycloudflare.com';
+
+        // Screens
+        const screens = ['main','status','downloads','admin'];
         function showScreen(name) {
-            screens.forEach(s => {
-                const el = document.getElementById('screen-' + s);
-                if(el) el.style.display = (s === name) ? 'block' : 'none';
-                const tab = document.getElementById('tab-' + s);
-                if(tab) tab.classList.toggle('nav-active', s === name);
+            screens.forEach(s=>{
+                const el = document.getElementById('screen-'+s);
+                if(el) el.style.display = s===name?'block':'none';
+                const tab = document.getElementById('tab-'+s);
+                if(tab) tab.classList.toggle('nav-active', s===name);
             });
         }
         showScreen('main');
 
-        // Login Modal
-        const loginModal = document.getElementById('loginModal');
-        function openLoginModal() { loginModal.style.opacity='1'; loginModal.style.pointerEvents='auto'; }
-        function closeLoginModal() { loginModal.style.opacity='0'; loginModal.style.pointerEvents='none'; }
-
-        // Login logic
-        document.querySelector('#loginModal form').addEventListener('submit', async (e)=>{
-            e.preventDefault();
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-            try {
-                const res = await fetch('http://localhost:5062/api/login', {
-                    method: 'POST',
-                    headers: {'Content-Type':'application/json'},
-                    body: JSON.stringify({ username, password })
-                });
-                if(res.ok){
-                    closeLoginModal();
-                    alert('Login successful!');
-                    showScreen('admin');
-                    fetchStatus();
-                }else{
-                    alert('Login failed');
-                }
-            }catch(err){ console.error(err); alert('Error connecting to backend'); }
-        });
-
-        // Support button
-        function openSupport(){
-            const name = encodeURIComponent(prompt("Your name:"));
-            const email = encodeURIComponent(prompt("Your email:"));
-            const message = encodeURIComponent(prompt("Your message:"));
-            if(!name || !email || !message){ alert("Please fill all fields."); return; }
-            const subject = encodeURIComponent("Support Request from "+name);
-            const body = `Name: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
-            window.location.href = `mailto:support@cloudworks.org.uk?subject=${subject}&body=${body}`;
+        // Announcements
+        let announcementText = "";
+        function updateAnnouncementBar() {
+            const bar = document.getElementById('announcement-bar');
+            const msg = document.getElementById('announcement-message');
+            if(announcementText){ bar.style.display='block'; msg.textContent=announcementText; }
+            else { bar.style.display='none'; msg.textContent=''; }
         }
-        document.getElementById('supportBtn').onclick = openSupport;
+        updateAnnouncementBar();
 
-        // Fetch service status
+        // Contact Modal
+        const modal = document.getElementById('contactModal');
+        const modalCard = document.getElementById('modalCard');
+        function openModal(){ modal.style.opacity='1'; modal.style.pointerEvents='auto'; modalCard.classList.add('modal-enter-active'); modalCard.classList.remove('modal-exit-active'); }
+        function closeModal(){ modal.style.opacity='0'; modal.style.pointerEvents='none'; modalCard.classList.remove('modal-enter-active'); modalCard.classList.add('modal-exit-active'); }
+        modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+        function sendEmail(event){
+            event.preventDefault();
+            const name=document.getElementById('name').value.trim();
+            const email=document.getElementById('email').value.trim();
+            const message=document.getElementById('message').value.trim();
+            if(!name||!email||!message){ alert("Fill all fields"); return; }
+            const subject=encodeURIComponent(`Support Request from ${name}`);
+            const body=`Name: ${encodeURIComponent(name)}\nEmail: ${encodeURIComponent(email)}\nMessage: ${encodeURIComponent(message)}`;
+            window.location.href=`mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body.replace(/\n/g,'%0A')}`;
+            closeModal();
+        }
+
+        // Admin login modal
+        let isAdmin=false;
+        const loginBtn=document.getElementById('login-btn');
+        function openLoginModal(){ const m=document.getElementById('loginModal'); m.style.opacity='1'; m.style.pointerEvents='auto'; }
+        function closeLoginModal(){ const m=document.getElementById('loginModal'); m.style.opacity='0'; m.style.pointerEvents='none'; }
+        document.getElementById('loginModal').addEventListener('click', e=>{ if(e.target===document.getElementById('loginModal')) closeLoginModal(); });
+
+        async function handleLogin(event){
+            event.preventDefault();
+            const username=document.getElementById('login-username').value.trim();
+            const password=document.getElementById('login-password').value.trim();
+            try{
+                const res=await fetch(backendUrl+'/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});
+                if(res.ok){
+                    const data=await res.json();
+                    isAdmin=true;
+                    closeLoginModal();
+                    loginBtn.textContent="Logout";
+                    loginBtn.onclick=logoutAdmin;
+                    showScreen('admin');
+                }else{
+                    alert("Invalid credentials");
+                }
+            }catch(e){
+                alert("Backend not reachable");
+            }
+        }
+        function logoutAdmin(){ isAdmin=false; loginBtn.textContent="Login"; loginBtn.onclick=openLoginModal; showScreen('main'); }
+
+        // Status fetching
         async function fetchStatus(){
             try{
-                const res = await fetch('http://localhost:5062/api/status');
-                const data = await res.json();
-                data.services.forEach(s=>{
-                    const el = document.getElementById(s.name.toLowerCase()+'-status');
-                    if(el){
-                        el.textContent = s.status.toUpperCase();
-                        el.className = `px-3 py-1 rounded font-semibold ${
-                            s.status==='up'?'bg-green-200 text-green-800':
-                            s.status==='down'?'bg-red-200 text-red-800':'bg-orange-200 text-orange-800'
-                        }`;
-                    }
-                });
-            }catch(err){ console.error(err); }
+                const res=await fetch(backendUrl+'/api/status');
+                if(res.ok){
+                    const data=await res.json();
+                    data.services.forEach(s=>{
+                        const el=document.getElementById(s.name.toLowerCase()+'-status');
+                        if(el){
+                            el.textContent=s.status;
+                            if(s.status==='up'){ el.className="px-3 py-1 rounded font-semibold bg-green-200 text-green-800"; }
+                            else if(s.status==='down'){ el.className="px-3 py-1 rounded font-semibold bg-red-200 text-red-800"; }
+                            else { el.className="px-3 py-1 rounded font-semibold bg-orange-200 text-orange-800"; }
+                        }
+                    });
+                    const m=document.getElementById('maintenance-indicator');
+                    if(data.services.some(s=>s.status==='maintenance')){ m.style.display='inline-block'; }
+                    else{ m.style.display='none'; }
+                }
+            }catch(e){ console.error(e); }
         }
-        setInterval(fetchStatus, 10000);
         fetchStatus();
+        setInterval(fetchStatus, 30000); // refresh every 30s
     </script>
 </body>
 </html>
