@@ -112,15 +112,15 @@ footer { margin-top: 0; }
 
 <!-- Login Modal -->
 <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 opacity-0 pointer-events-none">
-<div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
-  <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500">&times;</button>
-  <h2 class="text-3xl font-bold mb-6 text-green-600">Admin Login</h2>
-  <form onsubmit="handleLogin(event)" class="space-y-4">
-    <input type="text" id="login-username" placeholder="Username" required class="w-full border p-2 rounded"/>
-    <input type="password" id="login-password" placeholder="Password" required class="w-full border p-2 rounded"/>
-    <button type="submit" class="bg-green-500 text-white font-bold px-6 py-2 rounded hover:bg-green-600">Login</button>
-  </form>
-</div>
+  <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative">
+    <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500">&times;</button>
+    <h2 class="text-3xl font-bold mb-6 text-green-600">Admin Login</h2>
+
+    <a href="https://cloudmanager.cloudflareaccess.com"
+       class="block text-center bg-green-500 text-white font-bold px-6 py-3 rounded hover:bg-green-600">
+      Login with Cloudflare Access
+    </a>
+  </div>
 </div>
 
 <!-- Footer -->
