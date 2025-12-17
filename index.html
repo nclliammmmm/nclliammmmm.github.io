@@ -34,7 +34,6 @@ footer { margin-top: 0; }
   </div>
   <ul class="flex gap-2 md:gap-6 text-md font-medium items-center">
     <li><button onclick="showScreen('main')" id="tab-main" class="px-3 py-2 rounded transition">Home</button></li>
-    <li><button onclick="showScreen('status')" id="tab-status" class="px-3 py-2 rounded transition">Status</button></li>
     <li><button onclick="showScreen('downloads')" id="tab-downloads" class="px-3 py-2 rounded transition">Downloads</button></li>
     <li><button onclick="openLoginModal()" class="px-4 py-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition shadow font-semibold" id="login-btn">Login</button></li>
     <li><button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition shadow font-semibold">Contact IT</button></li>
@@ -57,20 +56,6 @@ footer { margin-top: 0; }
     <button onclick="openModal()" class="bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition transform">Get Support</button>
   </div>
 </section>
-</section>
-
-<!-- STATUS -->
-<section id="screen-status" class="hidden">
-<div class="max-w-2xl mx-auto bg-white bg-opacity-90 rounded-xl shadow-lg p-8 mt-8">
-  <h2 class="text-3xl font-extrabold mb-4 text-blue-600">Service Status</h2>
-  <div class="space-y-4">
-    <div class="flex items-center gap-4"><span class="text-xl font-bold">Plex</span><span id="plex-status" class="px-3 py-1 rounded font-semibold">Loading...</span></div>
-    <div class="flex items-center gap-4"><span class="text-xl font-bold">Jellyfin</span><span id="jellyfin-status" class="px-3 py-1 rounded font-semibold">Loading...</span></div>
-    <div class="flex items-center gap-4"><span class="text-xl font-bold">DNS</span><span id="dns-status" class="px-3 py-1 rounded font-semibold">Loading...</span></div>
-  </div>
-  <p class="mt-6 text-gray-500 text-sm">Status is fetched from the backend.</p>
-  <div class="mt-6"><span id="maintenance-indicator" class="px-3 py-1 rounded font-bold text-orange-700 bg-orange-200" style="display:none;">Maintenance Mode Active</span></div>
-</div>
 </section>
 
 <!-- DOWNLOADS -->
