@@ -374,7 +374,7 @@
     const message = (document.getElementById('message')||{}).value||'';
     const subject = encodeURIComponent(`Device/Support Request from ${name || 'User'}`);
     const body = `Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0ARequest: ${encodeURIComponent(message)}`;
-    window.location.href = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:business@cloudworks.org.uk?subject=${subject}&body=${body}`;
     closeModal();
   }
 
