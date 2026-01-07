@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Cloud Works Portal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%233490dc'/%3E%3Cpath[...]
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%233490dc'/%3E%3Cpath d='M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z' fill='%23ffffff'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
@@ -38,7 +38,7 @@
   .modal-panel { transition: transform 220ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease; }
   .glass { backdrop-filter: blur(6px); background: rgba(255,255,255,0.6); border: 1px solid rgba(15,23,42,0.04); }
   .product-image { object-fit: cover; width:100%; height:160px; border-radius:8px; background:#f1f5f9; }
-  .code-block { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace; font-size:12px; white-space:pre-wrap; background:#0f172a; color:#e6edf3; padding:12px[...]
+  .code-block { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace; font-size:12px; white-space:pre-wrap; background:#0f172a; color:#e6edf3; padding:12px; border-radius:8px; }
 </style>
 </head>
 <body>
@@ -46,18 +46,19 @@
 <header class="fixed w-full top-0 left-0 z-30">
   <nav class="container mx-auto flex justify-between items-center py-3 px-4 glass rounded-b-lg">
     <div class="flex items-center gap-3">
-      <span class="inline-flex w-10 h-10 rounded-full bg-gradient-to-tr from-sky-400 to-teal-400 items-center justify-center shadow">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="white" aria-hidden="true"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9[...]
+      <span class="inline-flex w-10 h-10 rounded-full bg-gradient-to-tr from-sky-400 to-teal-400 items-center justify-center shadow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z"/></svg>
       </span>
       <div>
         <div class="text-lg font-semibold text-slate-900">Cloud Works</div>
-        <div class="text-xs" style="color:var(--muted)">IT services & downloads</div>
+        <div class="text-xs" style="color:var(--muted)">Device provisioning & IT support</div>
       </div>
     </div>
 
     <ul class="flex gap-3 md:gap-5 items-center">
       <li><button onclick="showScreen('main')" id="tab-main" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 transition">Home</button></li>
       <li><button onclick="showScreen('downloads')" id="tab-downloads" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 transition">Downloads</button></li>
+      <li><button onclick="showScreen('devices')" id="tab-devices" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 transition">Devices</button></li>
       <li><button onclick="showScreen('shop')" id="tab-shop" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 transition">Shop</button></li>
       <li><button onclick="openLoginModal()" class="px-4 py-2 rounded-full bg-emerald-600 text-white hover:bg-emerald-700 transition shadow-sm font-semibold text-sm" id="login-btn">Login</button></li>
       <li><button onclick="openModal()" class="px-4 py-2 rounded-full bg-sky-600 text-white hover:bg-sky-700 transition shadow-sm font-semibold text-sm">Contact IT</button></li>
@@ -67,155 +68,189 @@
 
 <main class="container mx-auto w-full pb-12">
 
+  <!-- HOME -->
   <section id="screen-main">
     <section class="relative flex flex-col items-center justify-center py-20 mb-10 rounded-xl overflow-hidden card">
       <div class="relative z-10 max-w-2xl mx-auto text-center px-6">
         <h1 class="text-4xl md:text-5xl font-bold mb-3 text-slate-900">Cloud Works</h1>
-        <p class="text-lg text-slate-600 mb-6">Secure IT services and software downloads for registered users. Use the tabs above to visit our shop, download software or contact IT.</p>
+        <p class="text-lg text-slate-600 mb-6">
+          We provision devices and provide IT support for registered users. Devices are prepared and managed centrally — installations are handled via MDM and provisioning workflows.
+        </p>
         <div class="flex gap-3 justify-center">
-          <button onclick="showScreen('downloads')" class="px-5 py-3 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition font-semibold">Downloads</button>
-          <button onclick="showScreen('shop')" class="px-5 py-3 rounded-md border border-slate-200 text-slate-800 hover:bg-slate-50 transition">Shop</button>
+          <button onclick="showScreen('devices')" class="px-5 py-3 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition font-semibold">Request a device</button>
+          <button onclick="openModal()" class="px-5 py-3 rounded-md border border-slate-200 text-slate-800 hover:bg-slate-50 transition">Contact IT</button>
         </div>
       </div>
     </section>
 
-    <!-- Added content: Why Cloud Works, How it works, Help CTA -->
+    <!-- Why / How / CTA -->
     <section aria-labelledby="why-heading" class="max-w-5xl mx-auto mt-8 space-y-8 px-4">
-      <!-- Why Cloud Works -->
       <div class="card rounded-xl p-6">
         <h3 id="why-heading" class="text-2xl font-semibold mb-4 text-slate-900">Why Cloud Works</h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="p-4 rounded-lg bg-white border">
             <div class="flex items-start gap-3">
+              <div class="flex-none w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">🔧</div>
+              <div>
+                <div class="font-semibold text-slate-900">Device provisioning</div>
+                <div class="text-sm text-slate-600">We provision and configure devices for staff — all setup is done centrally using MDM and automated provisioning.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-lg bg-white border">
+            <div class="flex items-start gap-3">
               <div class="flex-none w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">🔒</div>
               <div>
-                <div class="font-semibold text-slate-900">Secure by default</div>
-                <div class="text-sm text-slate-600">All software and hardware in the store is vetted and approved for use on our network.</div>
+                <div class="font-semibold text-slate-900">Managed installs</div>
+                <div class="text-sm text-slate-600">We do not provide OS installers — software and OS images are deployed via MDM/provisioning for consistency and security.</div>
               </div>
             </div>
           </div>
 
           <div class="p-4 rounded-lg bg-white border">
             <div class="flex items-start gap-3">
-              <div class="flex-none w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">⚡</div>
+              <div class="flex-none w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">🔗</div>
               <div>
-                <div class="font-semibold text-slate-900">Fast support</div>
-                <div class="text-sm text-slate-600">Request help from IT and expect a response within our published support hours.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="p-4 rounded-lg bg-white border">
-            <div class="flex items-start gap-3">
-              <div class="flex-none w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">🛒</div>
-              <div>
-                <div class="font-semibold text-slate-900">Approved shop</div>
-                <div class="text-sm text-slate-600">Buy accessories and peripherals from the official Cloud Works store with quick checkout.</div>
+                <div class="font-semibold text-slate-900">Single sign-on</div>
+                <div class="text-sm text-slate-600">Cloudflare Access provides SSO links to approved services (Plex, Jellyfin, storage portals, etc.).</div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- How it works -->
       <div class="card rounded-xl p-6">
         <h4 class="text-xl font-semibold mb-3 text-slate-900">How it works</h4>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="flex flex-col items-start gap-3 p-4 rounded-lg bg-white border">
             <div class="text-2xl font-bold text-emerald-600">1</div>
-            <div class="font-semibold">Sign in</div>
-            <div class="text-sm text-slate-600">Use Cloudflare Access to authenticate and access restricted downloads.</div>
+            <div class="font-semibold">Request device</div>
+            <div class="text-sm text-slate-600">Open a request via Contact IT — include required specs and justification.</div>
           </div>
 
           <div class="flex flex-col items-start gap-3 p-4 rounded-lg bg-white border">
             <div class="text-2xl font-bold text-emerald-600">2</div>
-            <div class="font-semibold">Browse & download</div>
-            <div class="text-sm text-slate-600">Get OS media, tools or view available shop items — everything approved for staff use.</div>
+            <div class="font-semibold">Provision & configure</div>
+            <div class="text-sm text-slate-600">We image and configure devices using MDM, apply security policies and enroll the device.</div>
           </div>
 
           <div class="flex flex-col items-start gap-3 p-4 rounded-lg bg-white border">
             <div class="text-2xl font-bold text-emerald-600">3</div>
-            <div class="font-semibold">Contact support</div>
-            <div class="text-sm text-slate-600">Raise a ticket or contact IT directly for provisioning or custom requests.</div>
+            <div class="font-semibold">Delivery & support</div>
+            <div class="text-sm text-slate-600">Device is delivered and supported — raise follow-up tickets for additional software or changes.</div>
           </div>
         </div>
       </div>
 
-      <!-- Help CTA -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4 card rounded-xl p-6">
         <div>
-          <div class="text-lg font-semibold text-slate-900">Need help right now?</div>
-          <div class="text-sm text-slate-600">If something's urgent, open a support request and we'll prioritise it.</div>
+          <div class="text-lg font-semibold text-slate-900">Need a device?</div>
+          <div class="text-sm text-slate-600">Use the button to request provisioning. For urgent needs, contact IT directly.</div>
         </div>
         <div class="flex gap-3">
           <button onclick="openModal()" class="px-5 py-2 rounded-md bg-sky-600 text-white hover:bg-sky-700 transition font-semibold">Contact IT</button>
-          <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="px-5 py-2 rounded-md border border-slate-200 text-slate-900 hover:bg-slate-50 transition">Open Shop</a>
+          <button onclick="showScreen('devices')" class="px-5 py-2 rounded-md border border-slate-200 text-slate-900 hover:bg-slate-50 transition">Request a device</button>
         </div>
       </div>
     </section>
 
   </section>
 
+  <!-- DOWNLOADS -->
   <section id="screen-downloads" class="hidden">
     <div class="max-w-4xl mx-auto card rounded-xl p-8 mt-6">
-      <h2 class="text-2xl font-semibold mb-4 text-slate-900">Downloads</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+      <h2 class="text-2xl font-semibold mb-4 text-slate-900">Downloads & Images</h2>
+      <p class="text-sm text-slate-600 mb-4">
+        We do not publish OS installers or tools for direct download. Operating systems and core images are deployed to devices via our MDM/provisioning system. If you need a specific application installed, request it via Contact IT and we'll schedule deployment.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
         <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">W10</div>
-            <div>
-              <div class="text-lg font-semibold text-slate-900">Windows 10</div>
-              <div class="text-sm text-slate-500">Legacy support — being phased out</div>
-            </div>
-          </div>
-          <a href="https://www.microsoft.com/en-us/software-download/windows10" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text[...]
+          <div class="text-lg font-semibold text-slate-900 mb-2">MDM Enrollment</div>
+          <div class="text-sm text-slate-600">Instructions and help for enrolling devices in our MDM (contact IT for automated enrollment).</div>
         </div>
 
         <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">W11</div>
-            <div>
-              <div class="text-lg font-semibold text-slate-900">Windows 11</div>
-              <div class="text-sm text-slate-500">Recommended for most users</div>
-            </div>
-          </div>
-          <a href="https://www.microsoft.com/en-us/software-download/windows11" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text[...]
-        </div>
-
-        <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">WS</div>
-            <div>
-              <div class="text-lg font-semibold text-slate-900">Windows Server 2025</div>
-              <div class="text-sm text-slate-500">Evaluation and enterprise downloads</div>
-            </div>
-          </div>
-          <a href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 tra[...]
+          <div class="text-lg font-semibold text-slate-900 mb-2">Provisioning Policies</div>
+          <div class="text-sm text-slate-600">Security baseline, applications and access levels are applied during provisioning — request exceptions through IT.</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- DEVICES -->
+  <section id="screen-devices" class="hidden">
+    <div class="max-w-5xl mx-auto card rounded-xl p-8 mt-6">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-semibold mb-1 text-slate-900">Device provisioning</h2>
+          <p class="text-sm text-slate-600 mb-3">We provision laptops, workstations and approved peripherals for staff. Fill a request and we'll handle imaging, configuration and enrolment.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <div class="p-5 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
+          <div class="mb-3">
+            <div class="text-lg font-semibold text-slate-900">Standard Laptop</div>
+            <div class="text-sm text-slate-600">Configured with company baseline, full MDM enrolment and required security policies.</div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="text-sm text-slate-700 font-semibold">Request via Contact IT</div>
+            <button onclick="openModal()" class="inline-block px-3 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">Request</button>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
+          <div class="mb-3">
+            <div class="text-lg font-semibold text-slate-900">Docking Station</div>
+            <div class="text-sm text-slate-600">Provisioned to match laptop model and shipped ready-to-use.</div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="text-sm text-slate-700 font-semibold">Request via Contact IT</div>
+            <button onclick="openModal()" class="inline-block px-3 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">Request</button>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
+          <div class="mb-3">
+            <div class="text-lg font-semibold text-slate-900">Specialist Workstation</div>
+            <div class="text-sm text-slate-600">High-spec machines for creative or engineering workloads — provision on request.</div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="text-sm text-slate-700 font-semibold">Request via Contact IT</div>
+            <button onclick="openModal()" class="inline-block px-3 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">Request</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center">
+        <button onclick="openModal()" class="inline-block px-6 py-3 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition font-semibold">Request a device</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP (kept intact) -->
   <section id="screen-shop" class="hidden">
     <div class="max-w-5xl mx-auto card rounded-xl p-8 mt-6">
       <div class="flex items-start justify-between gap-4">
         <div>
           <h2 class="text-2xl font-semibold mb-1 text-slate-900">Shop</h2>
+          <p class="text-sm text-slate-600 mb-2">Official Cloud Works store — approved accessories and peripherals.</p>
         </div>
         <div class="flex items-center gap-3">
-          <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition text-sm">Open fu[...]
+          <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition text-sm">Open full shop</a>
         </div>
       </div>
 
       <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         <div id="shop-fallback" class="col-span-full text-center text-slate-600">
-          Loading products… If nothing appears, ensure you have a file at <code>/products.json</code> on the published branch. You can click "Sample JSON" for a template to copy.
+          Loading products… If nothing appears, ensure products.json exists in the site root. Click "Sample JSON" if you need a template.
           <div class="mt-4"><button onclick="showSampleJSON()" class="px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition">Sample JSON</button></div>
         </div>
       </div>
 
       <div class="mt-6 text-center">
-        <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition font-semibold">Vis[...]
+        <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition font-semibold">Visit the Cloud Works Store</a>
       </div>
     </div>
   </section>
@@ -236,29 +271,33 @@
   </div>
 </div>
 
-<!-- Contact + Login modals (unchanged) -->
+<!-- Contact Modal (unchanged) -->
 <div id="contactModal" class="fixed inset-0 z-40 modal-backdrop flex items-center justify-center bg-black bg-opacity-40 opacity-0 pointer-events-none">
   <div class="w-full max-w-xl p-8 bg-white rounded-2xl shadow-2xl relative modal-panel transform scale-95 opacity-0">
     <button onclick="closeModal()" aria-label="Close contact" class="absolute top-4 right-4 text-xl text-slate-400 hover:text-red-500">&times;</button>
-    <h2 class="text-2xl font-semibold mb-4 text-slate-900">Contact IT Support</h2>
+    <h2 class="text-2xl font-semibold mb-4 text-blue-600">Contact IT Support</h2>
     <form onsubmit="sendEmail(event)" class="space-y-4">
       <input type="text" id="name" placeholder="Name" required class="w-full border p-3 rounded-md" />
       <input type="email" id="email" placeholder="Email" required class="w-full border p-3 rounded-md" />
-      <textarea id="message" placeholder="Message" rows="5" required class="w-full border p-3 rounded-md"></textarea>
+      <textarea id="message" placeholder="Message (include device type/specs if requesting provisioning)" rows="5" required class="w-full border p-3 rounded-md"></textarea>
       <div class="flex justify-end">
-        <button type="submit" class="bg-slate-800 text-white px-6 py-2 rounded-md font-semibold hover:bg-slate-900">Send Email</button>
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-blue-700">Send Request</button>
       </div>
     </form>
   </div>
 </div>
 
+<!-- Login Modal (unchanged) -->
 <div id="loginModal" class="fixed inset-0 z-40 modal-backdrop flex items-center justify-center bg-black bg-opacity-40 opacity-0 pointer-events-none">
   <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative modal-panel transform scale-95 opacity-0">
     <button onclick="closeLoginModal()" aria-label="Close login" class="absolute top-4 right-4 text-xl text-slate-400 hover:text-red-500">&times;</button>
-    <h2 class="text-2xl font-semibold mb-4 text-slate-900">Login</h2>
-    <a href="https://cloudmanager.cloudflareaccess.com" class="block text-center bg-emerald-600 text-white font-bold px-6 py-3 rounded-md hover:bg-emerald-700">
+    <h2 class="text-2xl font-semibold mb-4 text-green-600">Login / Single sign-on</h2>
+
+    <a href="https://cloudmanager.cloudflareaccess.com" class="block text-center bg-emerald-600 text-white font-bold px-6 py-3 rounded-md hover:bg-emerald-700 mb-4">
       Login with Cloudflare Access
     </a>
+
+    <p class="text-sm text-slate-600">After sign-in you will see links to approved services (for example: Plex, Jellyfin, storage portals). If you need access to another service, contact IT.</p>
   </div>
 </div>
 
@@ -267,31 +306,52 @@
 </footer>
 
 <script>
-  const screens = ['main', 'downloads', 'shop'];
+  const screens = ['main', 'downloads', 'devices', 'shop'];
   function showScreen(name){
     screens.forEach(s=>{
       const el = document.getElementById('screen-'+s);
       if(el) el.style.display = (s===name) ? 'block' : 'none';
-      const tab = document.getElementById('tab-'+s);
+      const tabId = s === 'devices' ? 'tab-devices' : (s === 'shop' ? 'tab-shop' : 'tab-'+s);
+      const tab = document.getElementById(tabId);
       if(tab) tab.classList.toggle('nav-active', s===name);
     });
   }
   showScreen('main');
 
-  // modal helpers
+  // Contact modal controls (unchanged)
   const contactModal = document.getElementById('contactModal');
-  function openModal(){ contactModal.style.opacity='1'; contactModal.style.pointerEvents='auto'; const panel = contactModal.querySelector('.modal-panel'); if(panel){ panel.style.transform='translateY(0) scale(1)'; panel.style.opacity='1'; } }
-  function closeModal(){ const panel = contactModal.querySelector('.modal-panel'); if(panel){ panel.style.transform='translateY(6px) scale(.98)'; panel.style.opacity='0'; } contactModal.style.opacity='0'; contactModal.style.pointerEvents='none'; }
+  function openModal(){
+    contactModal.style.opacity='1';
+    contactModal.style.pointerEvents='auto';
+    const panel = contactModal.querySelector('.modal-panel');
+    if(panel){ panel.style.transform='translateY(0) scale(1)'; panel.style.opacity='1'; }
+  }
+  function closeModal(){
+    const panel = contactModal.querySelector('.modal-panel');
+    if(panel){ panel.style.transform='translateY(6px) scale(.98)'; panel.style.opacity='0'; }
+    contactModal.style.opacity='0';
+    contactModal.style.pointerEvents='none';
+  }
   contactModal.addEventListener('click', e=>{ if(e.target===contactModal) closeModal(); });
-  function sendEmail(e){ e.preventDefault(); const name = (document.getElementById('name')||{}).value||''; const email = (document.getElementById('email')||{}).value||''; const message = (document.getElementById('message')||{}).value||''; const subject = encodeURIComponent(`Support Request from ${name||'User'}`); const body = `Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`; window.location.href = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`; closeModal(); }
 
-  // login modal
+  function sendEmail(e){
+    e.preventDefault();
+    const name = (document.getElementById('name')||{}).value||'';
+    const email = (document.getElementById('email')||{}).value||'';
+    const message = (document.getElementById('message')||{}).value||'';
+    const subject = encodeURIComponent(`Device/Support Request from ${name || 'User'}`);
+    const body = `Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0ARequest: ${encodeURIComponent(message)}`;
+    window.location.href = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`;
+    closeModal();
+  }
+
+  // Login modal controls (unchanged)
   const loginModal = document.getElementById('loginModal');
   function openLoginModal(){ loginModal.style.opacity='1'; loginModal.style.pointerEvents='auto'; const panel = loginModal.querySelector('.modal-panel'); if(panel){ panel.style.transform='translateY(0) scale(1)'; panel.style.opacity='1'; } }
   function closeLoginModal(){ const panel = loginModal.querySelector('.modal-panel'); if(panel){ panel.style.transform='translateY(6px) scale(.98)'; panel.style.opacity='0'; } loginModal.style.opacity='0'; loginModal.style.pointerEvents='none'; }
   loginModal.addEventListener('click', e=>{ if(e.target===loginModal) closeLoginModal(); });
 
-  // product loader: only fetch /products.json (site root)
+  // product loader (keeps shop behaviour intact)
   async function loadProducts(){
     const grid = document.getElementById('product-grid');
     const fallback = document.getElementById('shop-fallback');
@@ -327,28 +387,22 @@
       if(fallback) fallback.innerHTML = 'Products not available — add a <code>products.json</code> at your repository root (published branch). Click "Sample JSON" above for a ready template.';
     }
   }
+
   function escapeHtml(str){ return String(str || '').replace(/[&<>"']/g, (m)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
-  // sample JSON modal behaviour
+  // sample JSON modal behaviour (keeps same helper)
   const sampleModal = document.getElementById('sampleModal');
   const sampleJson = `[
   {
-    "name": "Wireless Mouse",
-    "url": "https://cloudworks.sumupstore.com/products/wireless-mouse",
-    "image": "https://images.sumupstore.com/your-image-path/mouse.jpg",
-    "price": "£19.99",
-    "description": "Ergonomic mouse with long battery life"
-  },
-  {
-    "name": "USB-C Dock",
-    "url": "https://cloudworks.sumupstore.com/products/usb-c-dock",
-    "image": "https://images.sumupstore.com/your-image-path/dock.jpg",
+    "name": "Example Peripheral",
+    "url": "https://cloudworks.sumupstore.com/product/example-peripheral",
+    "image": "https://images.sumupstore.com/example.jpg",
     "price": "£49.99",
-    "description": "Compact docking station for staff laptops"
+    "description": "Short description"
   }
 ]`;
   document.getElementById('sampleJsonContent').textContent = sampleJson;
-  document.getElementById('openGitHubEdit').href = 'https://github.com/nclliammmmm/nclliammmmm.github.io/blob/main/products.json'; // adjust branch if needed
+  document.getElementById('openGitHubEdit').href = 'https://github.com/nclliammmmm/nclliammmmm.github.io/blob/main/products.json';
   document.getElementById('openGitHubEdit').textContent = 'Open file on GitHub';
 
   function showSampleJSON(){
