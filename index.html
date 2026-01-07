@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Cloud Works Portal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%233490dc'/%3E%3Cpath d='M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z' fill='%23ffffff'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%233490dc'/%3E%3Cpath[...]
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
@@ -38,7 +38,7 @@
   .modal-panel { transition: transform 220ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease; }
   .glass { backdrop-filter: blur(6px); background: rgba(255,255,255,0.6); border: 1px solid rgba(15,23,42,0.04); }
   .product-image { object-fit: cover; width:100%; height:160px; border-radius:8px; background:#f1f5f9; }
-  .code-block { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace; font-size:12px; white-space:pre-wrap; background:#0f172a; color:#e6edf3; padding:12px; border-radius:8px; }
+  .code-block { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace; font-size:12px; white-space:pre-wrap; background:#0f172a; color:#e6edf3; padding:12px[...]
 </style>
 </head>
 <body>
@@ -47,7 +47,7 @@
   <nav class="container mx-auto flex justify-between items-center py-3 px-4 glass rounded-b-lg">
     <div class="flex items-center gap-3">
       <span class="inline-flex w-10 h-10 rounded-full bg-gradient-to-tr from-sky-400 to-teal-400 items-center justify-center shadow">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="white" aria-hidden="true"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9.96z"/></svg>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="white" aria-hidden="true"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4A7 7 0 0 0 5 11c0 .34.03.67.07 1H4a4 4 0 0 0 0 8h15a5 5 0 0 0 .35-9[...]
       </span>
       <div>
         <div class="text-lg font-semibold text-slate-900">Cloud Works</div>
@@ -78,6 +78,82 @@
         </div>
       </div>
     </section>
+
+    <!-- Added content: Why Cloud Works, How it works, Help CTA -->
+    <section aria-labelledby="why-heading" class="max-w-5xl mx-auto mt-8 space-y-8 px-4">
+      <!-- Why Cloud Works -->
+      <div class="card rounded-xl p-6">
+        <h3 id="why-heading" class="text-2xl font-semibold mb-4 text-slate-900">Why Cloud Works</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="p-4 rounded-lg bg-white border">
+            <div class="flex items-start gap-3">
+              <div class="flex-none w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">🔒</div>
+              <div>
+                <div class="font-semibold text-slate-900">Secure by default</div>
+                <div class="text-sm text-slate-600">All software and hardware in the store is vetted and approved for use on our network.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-lg bg-white border">
+            <div class="flex items-start gap-3">
+              <div class="flex-none w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">⚡</div>
+              <div>
+                <div class="font-semibold text-slate-900">Fast support</div>
+                <div class="text-sm text-slate-600">Request help from IT and expect a response within our published support hours.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-lg bg-white border">
+            <div class="flex items-start gap-3">
+              <div class="flex-none w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">🛒</div>
+              <div>
+                <div class="font-semibold text-slate-900">Approved shop</div>
+                <div class="text-sm text-slate-600">Buy accessories and peripherals from the official Cloud Works store with quick checkout.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div class="card rounded-xl p-6">
+        <h4 class="text-xl font-semibold mb-3 text-slate-900">How it works</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="flex flex-col items-start gap-3 p-4 rounded-lg bg-white border">
+            <div class="text-2xl font-bold text-emerald-600">1</div>
+            <div class="font-semibold">Sign in</div>
+            <div class="text-sm text-slate-600">Use Cloudflare Access to authenticate and access restricted downloads.</div>
+          </div>
+
+          <div class="flex flex-col items-start gap-3 p-4 rounded-lg bg-white border">
+            <div class="text-2xl font-bold text-emerald-600">2</div>
+            <div class="font-semibold">Browse & download</div>
+            <div class="text-sm text-slate-600">Get OS media, tools or view available shop items — everything approved for staff use.</div>
+          </div>
+
+          <div class="flex flex-col items-start gap-3 p-4 rounded-lg bg-white border">
+            <div class="text-2xl font-bold text-emerald-600">3</div>
+            <div class="font-semibold">Contact support</div>
+            <div class="text-sm text-slate-600">Raise a ticket or contact IT directly for provisioning or custom requests.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Help CTA -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 card rounded-xl p-6">
+        <div>
+          <div class="text-lg font-semibold text-slate-900">Need help right now?</div>
+          <div class="text-sm text-slate-600">If something's urgent, open a support request and we'll prioritise it.</div>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="openModal()" class="px-5 py-2 rounded-md bg-sky-600 text-white hover:bg-sky-700 transition font-semibold">Contact IT</button>
+          <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="px-5 py-2 rounded-md border border-slate-200 text-slate-900 hover:bg-slate-50 transition">Open Shop</a>
+        </div>
+      </div>
+    </section>
+
   </section>
 
   <section id="screen-downloads" class="hidden">
@@ -92,7 +168,7 @@
               <div class="text-sm text-slate-500">Legacy support — being phased out</div>
             </div>
           </div>
-          <a href="https://www.microsoft.com/en-us/software-download/windows10" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">Download</a>
+          <a href="https://www.microsoft.com/en-us/software-download/windows10" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text[...]
         </div>
 
         <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
@@ -103,7 +179,7 @@
               <div class="text-sm text-slate-500">Recommended for most users</div>
             </div>
           </div>
-          <a href="https://www.microsoft.com/en-us/software-download/windows11" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">Download</a>
+          <a href="https://www.microsoft.com/en-us/software-download/windows11" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text[...]
         </div>
 
         <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
@@ -114,7 +190,7 @@
               <div class="text-sm text-slate-500">Evaluation and enterprise downloads</div>
             </div>
           </div>
-          <a href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">Download</a>
+          <a href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 tra[...]
         </div>
       </div>
     </div>
@@ -127,7 +203,7 @@
           <h2 class="text-2xl font-semibold mb-1 text-slate-900">Shop</h2>
         </div>
         <div class="flex items-center gap-3">
-          <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition text-sm">Open full shop</a>
+          <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition text-sm">Open fu[...]
         </div>
       </div>
 
@@ -139,7 +215,7 @@
       </div>
 
       <div class="mt-6 text-center">
-        <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition font-semibold">Visit the Cloud Works Store</a>
+        <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition font-semibold">Vis[...]
       </div>
     </div>
   </section>
