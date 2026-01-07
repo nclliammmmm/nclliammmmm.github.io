@@ -1,0 +1,16 @@
+[
+  {
+    "name": "USB-C Dock",
+    "url": "https://cloudworks.sumupstore.com/products/usb-c-dock",
+    "image": "https://images.sumupstore.com/....jpg",
+    "price": "£49.99",
+    "description": "Compact docking station for staff laptops"
+  },
+  {
+    "name": "Wireless Mouse",
+    "url": "https://cloudworks.sumupstore.com/products/wireless-mouse",
+    "image": "https://images.sumupstore.com/....jpg",
+    "price": "£19.99",
+    "description": "Ergonomic mouse with long battery life"
+  }
+]
