@@ -12,12 +12,11 @@
 <!-- End TrustBox script -->
 <style>
   :root{
-    --page-bg: #f8fafc;     /* neutral very light */
-    --card-bg: #ffffff;     /* card background */
-    --muted: #7c8794;       /* muted text */
-    --primary: #0f172a;     /* slate-900 */
-    --accent: #06b6d4;      /* teal-400 */
-    --accent-600: #0ea5a4;  /* teal-500 */
+    --page-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --muted: #7c8794;
+    --primary: #0f172a;
+    --accent-600: #0ea5a4;
   }
   html, body { height: 100%; }
   body {
@@ -32,37 +31,20 @@
   }
   main { flex: 1; padding-top: 5.5rem; }
   .nav-active { background:var(--accent-600); color:#fff; }
-  footer { margin-top: 0; }
-  #announcement-bar { transition: background 0.25s, transform 0.2s; }
-  /* subtle card appearance */
   .card {
     background: var(--card-bg);
     border: 1px solid rgba(15,23,42,0.04);
     box-shadow: 0 6px 18px rgba(15,23,42,0.06);
   }
-  /* modal transition */
-  .modal-backdrop {
-    transition: opacity 200ms ease, visibility 200ms ease;
-  }
-  .modal-panel {
-    transition: transform 220ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease;
-  }
-  /* subtle utilities */
-  .glass {
-    backdrop-filter: blur(6px);
-    background: rgba(255,255,255,0.6);
-    border: 1px solid rgba(15,23,42,0.04);
-  }
+  .modal-backdrop { transition: opacity 200ms ease, visibility 200ms ease; }
+  .modal-panel { transition: transform 220ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease; }
+  .glass { backdrop-filter: blur(6px); background: rgba(255,255,255,0.6); border: 1px solid rgba(15,23,42,0.04); }
+  .product-image { object-fit: cover; width:100%; height:160px; border-radius:8px; background:#f1f5f9; }
 </style>
 </head>
 <body>
 
-<!-- Announcements -->
-<div id="announcement-bar" class="w-full text-center py-2 bg-amber-100 text-amber-800 font-semibold shadow-sm hidden" aria-live="polite">
-    <span id="announcement-message"></span>
-</div>
-
-<!-- Navigation -->
+<!-- Navigation (same modern header) -->
 <header class="fixed w-full top-0 left-0 z-30">
   <nav class="container mx-auto flex justify-between items-center py-3 px-4 glass rounded-b-lg">
     <div class="flex items-center gap-3">
@@ -71,53 +53,43 @@
       </span>
       <div>
         <div class="text-lg font-semibold text-slate-900">Cloud Works</div>
-        <div class="text-xs text-muted" style="color:var(--muted)">IT services & downloads</div>
-      </div>
-    </div>
-
-    <!-- Trustpilot (kept but compact) -->
-    <div class="hidden md:block">
-      <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="69471bdcb25e4413d949becf" data-style-height="42px" data-style-width="180px" data-timestamp="true">
-        <a href="https://www.trustpilot.com/review/cloudworks.org.uk" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-600">Reviews</a>
+        <div class="text-xs" style="color:var(--muted)">IT services & downloads</div>
       </div>
     </div>
 
     <ul class="flex gap-3 md:gap-5 items-center">
       <li><button onclick="showScreen('main')" id="tab-main" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 transition">Home</button></li>
       <li><button onclick="showScreen('downloads')" id="tab-downloads" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 transition">Downloads</button></li>
-      <li><button onclick="window.location.href='https://cloudworks.sumupstore.com'" id="tab-shop" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 transition">SumUp Shop</button></li>
+      <li><button onclick="showScreen('shop')" id="tab-shop" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 transition">Shop</button></li>
       <li><button onclick="openLoginModal()" class="px-4 py-2 rounded-full bg-emerald-600 text-white hover:bg-emerald-700 transition shadow-sm font-semibold text-sm" id="login-btn">Login</button></li>
       <li><button onclick="openModal()" class="px-4 py-2 rounded-full bg-sky-600 text-white hover:bg-sky-700 transition shadow-sm font-semibold text-sm">Contact IT</button></li>
     </ul>
   </nav>
 </header>
 
-<!-- Main -->
 <main class="container mx-auto w-full pb-12">
 
   <!-- HOME -->
-  <section id="screen-main" aria-labelledby="home-heading">
+  <section id="screen-main">
     <section class="relative flex flex-col items-center justify-center py-20 mb-10 rounded-xl overflow-hidden card">
-      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 20% 20%, rgba(6,182,212,0.06) 0%, rgba(15,23,42,0.03) 40%);"></div>
       <div class="relative z-10 max-w-2xl mx-auto text-center px-6">
-        <h1 id="home-heading" class="text-4xl md:text-5xl font-bold mb-3 text-slate-900">Cloud Works</h1>
-        <p class="text-lg text-slate-600 mb-6">
-          Secure IT services and software downloads for registered users. Use the tabs above to visit our shop, download software or contact IT.
-        </p>
+        <h1 class="text-4xl md:text-5xl font-bold mb-3 text-slate-900">Cloud Works</h1>
+        <p class="text-lg text-slate-600 mb-6">Secure IT services and software downloads for registered users. Use the tabs above to visit our shop, download software or contact IT.</p>
         <div class="flex gap-3 justify-center">
           <button onclick="showScreen('downloads')" class="px-5 py-3 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition font-semibold">Downloads</button>
-          <button onclick="openModal()" class="px-5 py-3 rounded-md border border-slate-200 text-slate-800 hover:bg-slate-50 transition">Contact IT</button>
+          <button onclick="showScreen('shop')" class="px-5 py-3 rounded-md border border-slate-200 text-slate-800 hover:bg-slate-50 transition">Shop</button>
         </div>
       </div>
     </section>
   </section>
 
-  <!-- DOWNLOADS -->
-  <section id="screen-downloads" class="hidden" aria-labelledby="downloads-heading">
+  <!-- DOWNLOADS (unchanged) -->
+  <section id="screen-downloads" class="hidden">
     <div class="max-w-4xl mx-auto card rounded-xl p-8 mt-6">
-      <h2 id="downloads-heading" class="text-2xl font-semibold mb-4 text-slate-900">Downloads</h2>
+      <h2 class="text-2xl font-semibold mb-4 text-slate-900">Downloads</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-        <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border border-transparent hover:shadow-md transition">
+        <!-- cards omitted for brevity (same as before) -->
+        <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">W10</div>
             <div>
@@ -128,7 +100,7 @@
           <a href="https://www.microsoft.com/en-us/software-download/windows10" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">Download</a>
         </div>
 
-        <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border border-transparent hover:shadow-md transition">
+        <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">W11</div>
             <div>
@@ -139,7 +111,7 @@
           <a href="https://www.microsoft.com/en-us/software-download/windows11" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">Download</a>
         </div>
 
-        <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border border-transparent hover:shadow-md transition">
+        <div class="p-6 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-12 h-12 rounded-md bg-slate-100 flex items-center justify-center text-slate-700 font-bold">WS</div>
             <div>
@@ -149,6 +121,32 @@
           </div>
           <a href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025" target="_blank" class="inline-block mt-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">Download</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP: dynamic product grid loaded from /products.json -->
+  <section id="screen-shop" class="hidden">
+    <div class="max-w-5xl mx-auto card rounded-xl p-8 mt-6">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-semibold mb-1 text-slate-900">Shop</h2>
+          <p class="text-sm text-slate-600 mb-4">Browse featured items — click a product to view it in our SumUp store.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition text-sm">Open full shop</a>
+        </div>
+      </div>
+
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <!-- products will be injected here by JS. If products.json is missing, a fallback is shown -->
+        <div id="shop-fallback" class="col-span-full text-center text-slate-600">
+          Loading products… If nothing appears, generate a products.json in your site root (see README / instructions).
+        </div>
+      </div>
+
+      <div class="mt-6 text-center">
+        <a href="https://cloudworks.sumupstore.com" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition font-semibold">Visit the Cloud Works Store</a>
       </div>
     </div>
   </section>
@@ -176,24 +174,19 @@
   <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl relative modal-panel transform scale-95 opacity-0">
     <button onclick="closeLoginModal()" aria-label="Close login" class="absolute top-4 right-4 text-xl text-slate-400 hover:text-red-500">&times;</button>
     <h2 class="text-2xl font-semibold mb-4 text-slate-900">Login</h2>
-
     <a href="https://cloudmanager.cloudflareaccess.com" class="block text-center bg-emerald-600 text-white font-bold px-6 py-3 rounded-md hover:bg-emerald-700">
       Login with Cloudflare Access
     </a>
   </div>
 </div>
 
-<!-- Footer -->
 <footer class="text-center py-6 mt-10">
   <div class="text-sm text-slate-500">&copy; 2026 Cloud Works. All rights reserved.</div>
 </footer>
 
-<!-- Scripts -->
 <script>
   const backendUrl = "https://propecia-reached-babies-ice.trycloudflare.com";
-
-  // Screen switching
-  const screens = ['main', 'downloads'];
+  const screens = ['main', 'downloads', 'shop'];
   function showScreen(name){
     screens.forEach(s=>{
       const el = document.getElementById('screen-'+s);
@@ -204,72 +197,63 @@
   }
   showScreen('main');
 
-  // Contact modal controls
+  // modal controls (unchanged)
   const contactModal = document.getElementById('contactModal');
-  function openModal(){
-    contactModal.style.opacity='1';
-    contactModal.style.pointerEvents='auto';
-    const panel = contactModal.querySelector('.modal-panel');
-    if(panel){ panel.style.transform='translateY(0) scale(1)'; panel.style.opacity='1'; }
-  }
-  function closeModal(){
-    const panel = contactModal.querySelector('.modal-panel');
-    if(panel){ panel.style.transform='translateY(6px) scale(.98)'; panel.style.opacity='0'; }
-    contactModal.style.opacity='0';
-    contactModal.style.pointerEvents='none';
-  }
+  function openModal(){ contactModal.style.opacity='1'; contactModal.style.pointerEvents='auto'; const panel = contactModal.querySelector('.modal-panel'); if(panel){ panel.style.transform='translateY(0) scale(1)'; panel.style.opacity='1'; } }
+  function closeModal(){ const panel = contactModal.querySelector('.modal-panel'); if(panel){ panel.style.transform='translateY(6px) scale(.98)'; panel.style.opacity='0'; } contactModal.style.opacity='0'; contactModal.style.pointerEvents='none'; }
   contactModal.addEventListener('click', e=>{ if(e.target===contactModal) closeModal(); });
+  function sendEmail(e){ e.preventDefault(); const name = (document.getElementById('name') || {}).value || ''; const email = (document.getElementById('email') || {}).value || ''; const message = (document.getElementById('message') || {}).value || ''; const subject = encodeURIComponent(`Support Request from ${name || 'User'}`); const body = `Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`; window.location.href = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`; closeModal(); }
 
-  function sendEmail(e){
-    e.preventDefault();
-    const name = (document.getElementById('name') || {}).value || '';
-    const email = (document.getElementById('email') || {}).value || '';
-    const message = (document.getElementById('message') || {}).value || '';
-    const subject = encodeURIComponent(`Support Request from ${name || 'User'}`);
-    const body = `Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`;
-    window.location.href = `mailto:support@cloudworksmanager.co.uk?subject=${subject}&body=${body}`;
-    closeModal();
-  }
-
-  // Login modal controls
-  const loginModal = document.getElementById('loginModal');
-  function openLoginModal(){
-    loginModal.style.opacity='1';
-    loginModal.style.pointerEvents='auto';
-    const panel = loginModal.querySelector('.modal-panel');
-    if(panel){ panel.style.transform='translateY(0) scale(1)'; panel.style.opacity='1'; }
-  }
-  function closeLoginModal(){
-    const panel = loginModal.querySelector('.modal-panel');
-    if(panel){ panel.style.transform='translateY(6px) scale(.98)'; panel.style.opacity='0'; }
-    loginModal.style.opacity='0';
-    loginModal.style.pointerEvents='none';
-  }
-  loginModal.addEventListener('click', e=>{ if(e.target===loginModal) closeLoginModal(); });
-
-  // Simple login stub (keeps original behaviour)
+  // login stub
   let isAdmin = false;
   const loginBtn = document.getElementById('login-btn');
-  function handleLogin(event){
-    event.preventDefault();
-    // kept minimal; original had backend POST
-    isAdmin = true;
-    closeLoginModal();
-    if(loginBtn){
-      loginBtn.textContent = "Logout";
-      loginBtn.onclick = logoutAdmin;
-    }
-    alert("Login successful (stub)!");
-  }
-  function logoutAdmin(){
-    isAdmin = false;
-    if(loginBtn){
-      loginBtn.textContent = "Login";
-      loginBtn.onclick = openLoginModal;
-    }
-  }
+  function openLoginModal(){ const loginModal = document.getElementById('loginModal'); loginModal.style.opacity='1'; loginModal.style.pointerEvents='auto'; const panel = loginModal.querySelector('.modal-panel'); if(panel){ panel.style.transform='translateY(0) scale(1)'; panel.style.opacity='1'; } }
+  function closeLoginModal(){ const loginModal = document.getElementById('loginModal'); const panel = loginModal.querySelector('.modal-panel'); if(panel){ panel.style.transform='translateY(6px) scale(.98)'; panel.style.opacity='0'; } loginModal.style.opacity='0'; loginModal.style.pointerEvents='none'; }
+  function handleLogin(){ isAdmin=true; closeLoginModal(); if(loginBtn){ loginBtn.textContent="Logout"; loginBtn.onclick = logoutAdmin; } alert('Login (stub)'); }
+  function logoutAdmin(){ isAdmin=false; if(loginBtn){ loginBtn.textContent="Login"; loginBtn.onclick = openLoginModal; } }
 
-  // Status fetch (defensive)
+  // product loader - expects /products.json to exist at site root
+  async function loadProducts(){
+    const grid = document.getElementById('product-grid');
+    const fallback = document.getElementById('shop-fallback');
+    try {
+      const res = await fetch('/products.json', {cache: 'no-store'});
+      if(!res.ok) throw new Error('products.json not found');
+      const products = await res.json();
+      if(!Array.isArray(products) || products.length === 0) throw new Error('no products');
+      // remove fallback
+      if(fallback) fallback.remove();
+      grid.innerHTML = products.map(p => {
+        const name = escapeHtml(p.name || 'Product');
+        const price = escapeHtml(p.price || '');
+        const image = p.image || '';
+        const url = p.url || 'https://cloudworks.sumupstore.com';
+        return `
+          <div class="p-5 rounded-lg bg-gradient-to-b from-white to-slate-50 border hover:shadow-md transition">
+            <a href="${url}" target="_blank" rel="noopener">
+              <img class="product-image mb-4" src="${image}" alt="${name}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x240?text=No+Image'"/>
+            </a>
+            <div class="mb-3">
+              <div class="text-lg font-semibold text-slate-900">${name}</div>
+              <div class="text-sm text-slate-500">${escapeHtml(p.description || '')}</div>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="text-sm text-slate-700 font-semibold">${price}</div>
+              <a href="${url}" target="_blank" rel="noopener" class="inline-block px-3 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 transition text-sm">View in Shop</a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    } catch (err) {
+      // keep fallback and log a hint
+      console.debug('Could not load products.json:', err);
+      if(fallback) fallback.textContent = 'Products not available — run the provided scraper to generate products.json or add a products.json file to your site root.';
+    }
+  }
+  function escapeHtml(str){ return String(str || '').replace(/[&<>"']/g, (m)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  loadProducts();
+
+  // status fetch (kept defensive)
   async function fetchStatus(){
     try{
       const res = await fetch(backendUrl + '/api/status');
@@ -284,14 +268,8 @@
         else if(s.status === 'down') el.className = "px-3 py-1 rounded font-semibold bg-red-200 text-red-800";
         else el.className = "px-3 py-1 rounded font-semibold bg-amber-200 text-amber-800";
       });
-      const maint = document.getElementById('maintenance-indicator');
-      if(maint) maint.style.display = data.services.some(s=>s.status==='maintenance') ? 'inline-block' : 'none';
-    }catch(e){
-      // silent fail; keep console for debug
-      console.debug('status fetch failed', e);
-    }
+    }catch(e){ console.debug('status fetch failed', e); }
   }
-  // initial call and interval
   fetchStatus();
   setInterval(fetchStatus, 30000);
 </script>
