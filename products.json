@@ -8,31 +8,31 @@
   {
     "name": "Diet Coke",
     "url": "https://cloudworks.sumupstore.com/product/diet-coke",
-    "image": "https://images.sumupstore.com/img_3BE06F5KGA9QWSKGRR7MYS2H2H/image.png",
+    "image": "https://images.sumupstore.com/img_3BE06F5KGA9QWSKGRR7MYS2H2H",
     "price": "£2.19"
   },
   {
     "name": "Haribo Starmix",
     "url": "https://cloudworks.sumupstore.com/product/haribo-starmix",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_1TSAMWVJC39TK952BAZYDZ5K8V",
     "price": "£2.19"
   },
   {
     "name": "Haribo Tangfastics",
     "url": "https://cloudworks.sumupstore.com/product/haribo-tangfastics",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_26Z5GJMFEZ9Q3BRKC34900PH59",
     "price": "£2.19"
   },
   {
     "name": "Lucozade Sport",
     "url": "https://cloudworks.sumupstore.com/product/lucozade-sport",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_3G9K74VKYJ9F99AE9SK874RDX3",
     "price": "£2.49"
   },
   {
     "name": "Maltesers",
     "url": "https://cloudworks.sumupstore.com/product/maltesers",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_6E55JM65G49RZT4FJEXYBAN7FS",
     "price": "£2.49"
   },
   {
@@ -44,43 +44,43 @@
   {
     "name": "Pepsi Max",
     "url": "https://cloudworks.sumupstore.com/product/pepsi-max",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_059KGWSCFD8SPRMQNBDG3B7VJ9",
     "price": "£1.79"
   },
   {
     "name": "Refreshers",
     "url": "https://cloudworks.sumupstore.com/product/refreshers",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_0PY4K7FJYD9DC97J013B5P6MFE",
     "price": "£2.19"
   },
   {
     "name": "Sour Patch Kids Blue",
     "url": "https://cloudworks.sumupstore.com/product/sour-patch-kids-blue",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_6R4C8AG88G8Z6RT96TDN9P98RF",
     "price": "£2.19"
   },
   {
     "name": "Sour Patch Kids Fruit Mix",
     "url": "https://cloudworks.sumupstore.com/product/sour-patch-kids-fruit-mix",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_2S8TW0PFBB9GR92BWH2ZW8YP3H",
     "price": "£2.19"
   },
   {
     "name": "Sour Patch Kids Original",
     "url": "https://cloudworks.sumupstore.com/product/sour-patch-kids-original",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_4JM0ESPME2811ST9R8JHQXH40Z",
     "price": "£2.19"
   },
   {
     "name": "Sour Patch Kids Watermelon",
     "url": "https://cloudworks.sumupstore.com/product/sour-patch-kids-watermelon",
-    "image": "",
+    "image": "https://images.sumup.com/img_1C71604HRV96DVX605SSWET37J",
     "price": "£2.19"
   },
   {
     "name": "Water",
     "url": "https://cloudworks.sumupstore.com/product/water",
-    "image": "https://images.sumupstore.com/....jpg",
+    "image": "https://images.sumup.com/img_4DFD9PTK3685WAF79D4T18HWMX",
     "price": "£1.00"
   }
 ]
